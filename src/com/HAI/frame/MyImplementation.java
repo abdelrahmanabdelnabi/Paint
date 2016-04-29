@@ -19,10 +19,10 @@ public class MyImplementation {
 	private static void createAndShowGUI() {
 		System.out.println("Created GUI on EDT? "
 				+ SwingUtilities.isEventDispatchThread());
-		JFrame f = new JFrame("My imp");
+		JFrame f = new JFrame("HAI Paint Program");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.add(new PaintingPanel());
-		f.setSize(800, 600);
+		f.setSize(1024, 720);
 		f.setVisible(true);
 	}
 
