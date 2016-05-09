@@ -1,4 +1,4 @@
-package com.HAI.shapes;
+package src.com.HAI.shapes;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

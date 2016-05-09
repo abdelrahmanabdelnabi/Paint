@@ -1,5 +1,5 @@
-package com.HAI.frame;
-
+package src.com.HAI.frame;
+import src.com.HAI.shapes.*;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -20,10 +20,10 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.HAI.shapes.DrawingProperties;
-import com.HAI.shapes.MyEllipse;
-import com.HAI.shapes.MyRectangle;
-import com.HAI.shapes.MyTriangle;
+import src.com.HAI.shapes.DrawingProperties;
+import src.com.HAI.shapes.MyEllipse;
+import src.com.HAI.shapes.MyRectangle;
+import src.com.HAI.shapes.MyTriangle;
 
 public class PaintingPanel extends JPanel {
 

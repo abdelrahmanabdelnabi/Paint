@@ -1,4 +1,4 @@
-package com.HAI.shapes;
+package src.com.HAI.shapes;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

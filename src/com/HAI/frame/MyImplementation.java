@@ -1,4 +1,4 @@
-package com.HAI.frame;
+package src.com.HAI.frame;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
