@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
+import src.com.HAI.frame.ShapeDetails;
+
 public class MyEllipse extends Ellipse2D.Float{
 
 	private DrawingProperties prop = new DrawingProperties();
@@ -33,6 +35,20 @@ public class MyEllipse extends Ellipse2D.Float{
 		} finally {
 			g2d.dispose();
 		}
+	}
+	
+	public void updateDetailsPanel(ShapeDetails panel){
+		
+		panel.setShape(this);
+		
+		panel.TypeLabel.setText(getClass().getName());
+		
+		panel.XField.setText(x + "");
+		panel.YField.setText(y + "");
+		
+		panel.HeightField.setText(height + "");
+		panel.WidthField.setText(width + "");
+		
 	}
 
 	public DrawingProperties getProp() {

@@ -2,6 +2,7 @@ package src.com.HAI.frame;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -10,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Stack;
 
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import src.com.HAI.shapes.DrawingProperties;
@@ -19,26 +21,51 @@ import src.com.HAI.shapes.MyTriangle;
 
 public class PaintingPanel extends JPanel {
 
-	private MainFrame mainFrame; // a referenece to the parent frame of this panel
+	private MainFrame mainFrame; // a referenece to the parent frame of this
+									// panel
 
-	private int x, y; // x & y: the x & y coordinates of the mouse "press"	
-	private int fx, fy; // fx & fy: the x & y coordinates of the mouse "released"
-	private int CurrX, CurrY; // CurrX and CurrY: the x & y coordinates of the current mouse location
-	 
-	private DrawingProperties currProp = new DrawingProperties(); //the current drawing properties for drawing shapes
+	private int x, y; // x & y: the x & y coordinates of the mouse "press"
+	private int fx, fy; // fx & fy: the x & y coordinates of the mouse
+						// "released"
+	private int CurrX, CurrY; // CurrX and CurrY: the x & y coordinates of the
+								// current mouse location
+
+	private DrawingProperties currProp = new DrawingProperties(); // the current
+																	// drawing
+																	// properties
+																	// for
+																	// drawing
+																	// shapes
+
+	boolean dragging = false; // a boolean flag indicating of the user is
+								// drawing a shape by dragging the mouse
 	
-	boolean dragging = false; // a boolean flag indicating of the user is drawing a shape by dragging the mouse
-	boolean drawingTriangle = false; // a boolean flag indicating if the user it drawing a triangle by clicking on 3 separate location
+	boolean drawingTriangle = false; // a boolean flag indicating if the user it
+										// drawing a triangle by clicking on 3
+										// separate location
+	
+	public boolean moving = false;
+	public boolean copying = false;
 
-	private MyRectangle Rdrag = new MyRectangle();  // an instance of a rectangle that is drawn while dragging the mouse
-	private Ellipse2D Edrag = new MyEllipse(); // an instance of the ellipse that is drawn while draggin the ellipse
+	private MyRectangle Rdrag = new MyRectangle(); // an instance of a rectangle
+													// that is drawn while
+													// dragging the mouse
+	
+	private MyEllipse Edrag = new MyEllipse(); // an instance of the ellipse
+												// that is drawn while draggin
+												// the ellipse
+	public Shape selectedShape;
 
-	private int[] xpoints = new int[3];  // an array of x and y coordinates of the 3 mouse clicks for drawing the triangle
+	private int[] xpoints = new int[3]; // an array of x and y coordinates of
+										// the 3 mouse clicks for drawing the
+										// triangle
 	private int[] ypoints = new int[3];
 
-	private int clicks = 0; // the number of clicks clicked when drawing a triangle
+	private int clicks = 0; // the number of clicks clicked when drawing a
+							// triangle
 
-	Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that a drawn
+	Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
+												// a drawn
 
 	public PaintingPanel() {
 		setLayout(null);
@@ -66,20 +93,29 @@ public class PaintingPanel extends JPanel {
 					e1.printStackTrace();
 				}
 
-				if (mainFrame.rdbtnSquare.isSelected()) {
+				if (mainFrame.rdbtnRectangle.isSelected()) {
 					MyRectangle r = new MyRectangle(Math.min(x, fx), Math.min(y, fy), Math.abs(fx - x),
 							Math.abs(fy - y));
 
 					r.setProp(cloned);
 					shapes.add(r);
 
-				} else if (mainFrame.rdbtnCircle.isSelected()) {
+				} else if (mainFrame.rdbtnEllipse.isSelected()) {
 					MyEllipse ellipse = new MyEllipse(Math.min(x, fx), Math.min(y, fy), Math.abs(fx - x),
 							Math.abs(fy - y));
 
 					ellipse.setProp(cloned);
 					shapes.add(ellipse);
+				} else if (mainFrame.rdbtnSquare.isSelected()) {
+					MyRectangle r = (MyRectangle) Rdrag.clone();
 
+					r.setProp(cloned);
+					shapes.add(r);
+				} else if (mainFrame.rdbtnCircle.isSelected()) {
+					MyEllipse ellipse = (MyEllipse) Edrag.clone();
+
+					ellipse.setProp(cloned);
+					shapes.add(ellipse);
 				}
 
 				repaint();
@@ -89,12 +125,24 @@ public class PaintingPanel extends JPanel {
 				int xClick = e.getX();
 				int yClick = e.getY();
 
-				if (!mainFrame.rdbtnTriangle.isSelected()) {
+				if(moving == true){
+					if (selectedShape instanceof MyEllipse) {
+						((MyEllipse) selectedShape).x = xClick - ((MyEllipse) selectedShape).width/2;
+						((MyEllipse) selectedShape).y = yClick - ((MyEllipse) selectedShape).height/2;
+						
+						moving = false;
+					}
+				}
+				if (mainFrame.rdbtnSelect.isSelected()) {
+					selectedShape = getSelectedShape(xClick, yClick);
 
-					Shape delete = getSelectedShape(xClick, yClick);
+					ShapeDetails sd = mainFrame.detailsPanel;
 
-					if (delete != null)
-						shapes.remove(delete);
+					if (selectedShape instanceof MyEllipse) {
+						((MyEllipse) selectedShape).updateDetailsPanel(sd);
+					} // else if rectangle...
+					
+
 				} else {
 					// triangle is selected so the user is trying to draw one
 					drawingTriangle = true;
@@ -107,16 +155,15 @@ public class PaintingPanel extends JPanel {
 
 						MyTriangle t = new MyTriangle(xpoints, ypoints, 3);
 
+						DrawingProperties cloned;
 						try {
-							t.setProp((DrawingProperties) currProp.clone());
+							cloned = (DrawingProperties) currProp.clone();
+							t.setProp(cloned);
 						} catch (CloneNotSupportedException e1) {
 							e1.printStackTrace();
 						}
 
 						shapes.add(t);
-						System.out.println("adding new trinagle to shapes array size = " + shapes.size());
-						System.out.println(xpoints[0] + " " + xpoints[1] + " " + xpoints[2] + " " + ypoints[0] + " "
-								+ ypoints[1] + " " + ypoints[2]);
 
 						// reset the number of clicks to 0
 						clicks = 0;
@@ -129,25 +176,52 @@ public class PaintingPanel extends JPanel {
 
 				repaint();
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
-				mainFrame.updateCoordinates(0, 0);				
+				CurrX = 0;
+				CurrY = 0;
+				mainFrame.updateCoordinates(0, 0);
 			}
 		});
 
 		this.addMouseMotionListener(new MouseAdapter() {
 
 			public void mouseDragged(MouseEvent e) {
-				if (mainFrame.rdbtnSquare.isSelected()) {
 
-					Rdrag.setFrame(Math.min(x, e.getX()), Math.min(y, e.getY()), 
-								   Math.abs(x - e.getX()), Math.abs(y - e.getY()));
-					
+				if (mainFrame.rdbtnRectangle.isSelected()) {
+
+					Rdrag.setFrame(Math.min(x, e.getX()), Math.min(y, e.getY()), Math.abs(x - e.getX()),
+							Math.abs(y - e.getY()));
+
+				} else if (mainFrame.rdbtnEllipse.isSelected()) {
+
+					Edrag.setFrame(Math.min(x, e.getX()), Math.min(y, e.getY()), Math.abs(x - e.getX()),
+							Math.abs(y - e.getY()));
+
+				} else if (mainFrame.rdbtnSquare.isSelected()) {
+
+					int sideLength = Math.max(Math.abs(x - e.getX()), Math.abs(y - e.getY()));
+
+					Rdrag.setFrame(Math.min(x, e.getX()), Math.min(y, e.getY()), sideLength, sideLength);
+
+					if (e.getX() < x)
+						Rdrag.x = x - sideLength;
+					if (e.getY() < y)
+						Rdrag.y = y - sideLength;
 				} else if (mainFrame.rdbtnCircle.isSelected()) {
 
-					Edrag.setFrame(Math.min(x, e.getX()), Math.min(y, e.getY()), 
-							   Math.abs(x - e.getX()), Math.abs(y - e.getY()));
+					int radius = Math.max(Math.abs(x - e.getX()), Math.abs(y - e.getY()));
+
+					Edrag.setFrame(Math.min(x, e.getX()), Math.min(y, e.getY()), radius, radius);
+
+					if (e.getX() < x && e.getY() > y)
+						Edrag.setFrame(x - radius, Math.min(y, e.getY()), radius, radius);
+					else if (e.getY() < y && e.getX() > x)
+						Edrag.setFrame(Math.min(x, e.getX()), y - radius, radius, radius);
+					else if (e.getX() < x && e.getY() < y)
+						Edrag.setFrame(x - radius, y - radius, radius, radius);
+
 				}
 
 				dragging = true;
@@ -160,6 +234,11 @@ public class PaintingPanel extends JPanel {
 				CurrX = e.getX();
 				CurrY = e.getY();
 				
+				if(moving || copying){
+					Edrag.x = CurrX - Edrag.width/2;
+					Edrag.y = CurrY - Edrag.height/2;
+				}
+
 				mainFrame.updateCoordinates(CurrX, CurrY);
 
 				repaint();
@@ -182,7 +261,13 @@ public class PaintingPanel extends JPanel {
 		}
 
 		if (dragging) {
-			if (mainFrame.rdbtnSquare.isSelected()) {
+			if (mainFrame.rdbtnRectangle.isSelected()) {
+				g.setColor(Color.black);
+				((Graphics2D) g).draw((Shape) Rdrag);
+			} else if (mainFrame.rdbtnEllipse.isSelected()) {
+				g.setColor(Color.black);
+				((Graphics2D) g).draw((Shape) Edrag);
+			} else if (mainFrame.rdbtnSquare.isSelected()) {
 				g.setColor(Color.black);
 				((Graphics2D) g).draw((Shape) Rdrag);
 			} else if (mainFrame.rdbtnCircle.isSelected()) {
@@ -191,6 +276,12 @@ public class PaintingPanel extends JPanel {
 			}
 
 			dragging = false;
+		}
+		
+		if(moving || copying){
+			g.setColor(Color.black);
+			((Graphics2D) g).draw((Shape) Edrag);
+
 		}
 
 		if (clicks == 1) {
@@ -213,6 +304,13 @@ public class PaintingPanel extends JPanel {
 		}
 		repaint();
 	}
+	
+	public void moveActionPerformed(){
+		if(selectedShape instanceof MyEllipse){
+			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
+			moving = true;
+		}
+	}
 
 	public void thicknessChanged(int newThickness) {
 		currProp.setStroke(new BasicStroke(newThickness));
@@ -228,10 +326,6 @@ public class PaintingPanel extends JPanel {
 		currProp.setOutline(c);
 	}
 
-	public void setMainFrame(MainFrame mainFrame) {
-		this.mainFrame = mainFrame;
-	}
-
 	private Shape getSelectedShape(int x, int y) {
 		Shape selected = null;
 
@@ -243,5 +337,9 @@ public class PaintingPanel extends JPanel {
 		}
 
 		return selected;
+	}
+
+	public void setMainFrame(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
 	}
 }
