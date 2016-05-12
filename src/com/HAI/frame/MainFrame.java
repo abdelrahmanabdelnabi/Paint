@@ -36,6 +36,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 	private JButton btnUndo;
 	private JButton btnOutlineColor;
 	private JButton btnFillColor;
+	private JButton btnRedo;
 
 	private JSlider thickness;
 
@@ -167,6 +168,16 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		});
 		btnUndo.setBounds(863, 29, 89, 23);
 		getContentPane().add(btnUndo);
+		
+		btnRedo = new JButton("redo");
+		btnRedo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.redoActionPerformed();
+
+			}
+		});
+		btnRedo.setBounds(990, 29, 89, 23);
+		getContentPane().add(btnRedo);
 
 		thickness = new JSlider();
 		thickness.setValue(3);
