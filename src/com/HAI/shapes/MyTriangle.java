@@ -29,6 +29,7 @@ public class MyTriangle extends Polygon {
 
 			g2d.setStroke(prop.getStroke());
 			g2d.setColor(prop.getOutline());
+			
 			g2d.draw(this);
 
 		} finally {
@@ -43,6 +44,4 @@ public class MyTriangle extends Polygon {
 	public void setProp(DrawingProperties prop) {
 		this.prop = prop;
 	}
-	
-	
 }

@@ -41,10 +41,10 @@ public class MyEllipse extends Ellipse2D.Float{
 		
 		panel.setShape(this);
 		
-		panel.TypeLabel.setText(getClass().getName());
+		panel.TypeLabel.setText("Oval");
 		
-		panel.XField.setText(x + "");
-		panel.YField.setText(y + "");
+		panel.XField.setText((x + width/2) + "");
+		panel.YField.setText(y + height/2 + "");
 		
 		panel.HeightField.setText(height + "");
 		panel.WidthField.setText(width + "");
@@ -58,4 +58,6 @@ public class MyEllipse extends Ellipse2D.Float{
 	public void setProp(DrawingProperties prop) {
 		this.prop = prop;
 	}
+	
 }
+
