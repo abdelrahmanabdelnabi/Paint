@@ -122,6 +122,10 @@ public class ShapeDetails extends JPanel {
 		add(FillBtn);
 		
 		OutlineBtn = new JButton("Change");
+		OutlineBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		OutlineBtn.setBounds(112, 230, 88, 25);
 		add(OutlineBtn);
 
