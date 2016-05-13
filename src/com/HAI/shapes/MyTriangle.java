@@ -50,6 +50,9 @@ public class MyTriangle extends Polygon implements myShape {
 		panel.WidthField.setText(xpoints[2] + " , "+ ypoints[2]+"");
 		panel.HeightField.setVisible(false);
 		panel.lblHeight.setVisible(false);
+		
+		
+		
  
 	}
 	

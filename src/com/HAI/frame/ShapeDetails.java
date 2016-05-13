@@ -57,6 +57,7 @@ public class ShapeDetails extends JPanel {
 		lblX.setBounds(12, 62, 30, 15);
 		add(lblX);
 		
+		
 		 lblY = new JLabel("Y");
 		lblY.setBounds(12, 96, 30, 15);
 		add(lblY);

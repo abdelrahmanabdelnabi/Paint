@@ -158,6 +158,7 @@ public class PaintingPanel extends JPanel {
 					}else if (selectedShape instanceof MyTriangle){
 						((MyTriangle) selectedShape).updateDetailsPanel(sd);
 					}
+					
 				} else if (mainFrame.rdbtnTriangle.isSelected()) {
 					// triangle is selected so the user is trying to draw one
 					drawingTriangle = true;

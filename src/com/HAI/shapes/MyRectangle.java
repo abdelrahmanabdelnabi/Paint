@@ -48,6 +48,7 @@ public class MyRectangle extends Rectangle implements myShape{
         panel.lblY.setText("Y");
         panel.lblWidth.setText("Width");
 		panel.lblHeight.setVisible(true);
+		
 		panel.HeightField.setVisible(true);
 
 	}

@@ -51,6 +51,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		this.prop = prop;
 	}
 
+	
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
@@ -67,6 +68,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		}
 	}
 
+	
 	@Override
 	public void fill(Graphics2D g2d) {
 		// TODO Auto-generated method stub
