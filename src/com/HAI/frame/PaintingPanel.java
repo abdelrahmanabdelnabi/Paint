@@ -307,6 +307,11 @@ public class PaintingPanel extends JPanel {
 		repaint();
 	}
 
+	public void clearActionPerformed (){
+		while(!shapes.isEmpty()){
+			shapes.pop();
+		}
+	}
 	public void moveActionPerformed() {
 		if (selectedShape instanceof MyEllipse) {
 			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
