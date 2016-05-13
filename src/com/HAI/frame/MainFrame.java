@@ -447,7 +447,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 
 	@Override
 	public void copyBtnClicked() {
-		// TODO Auto-generated method stub
+		panel.copyActionPerformed();
 		
 	}
 }

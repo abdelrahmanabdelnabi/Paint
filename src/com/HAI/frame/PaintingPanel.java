@@ -131,10 +131,14 @@ public class PaintingPanel extends JPanel {
 
 				if (moving == true) {
 					if (selectedShape instanceof MyEllipse) {
-						((MyEllipse) selectedShape).x = xClick - ((MyEllipse) selectedShape).width / 2;
-						((MyEllipse) selectedShape).y = yClick - ((MyEllipse) selectedShape).height / 2;
+						MyEllipse Ellipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
+						Ellipse.x = xClick - Ellipse.width / 2;
+						Ellipse.y = yClick - Ellipse.height / 2;
+						
+						shapeHandlerObject.cloneShape(Ellipse , selectedShape);
 
 						moving = false;
+						
 					} else if (selectedShape instanceof MyRectangle) {
 						MyRectangle Rectangle = (MyRectangle) ((MyRectangle) selectedShape).clone();
 						Rectangle.x = xClick - Rectangle.width / 2;
@@ -154,6 +158,7 @@ public class PaintingPanel extends JPanel {
 						shapeHandlerObject.addShape(Ellipse);
 
 						copying = false;
+						
 					} else if (selectedShape instanceof MyRectangle) {
 						MyRectangle Rectangle = (MyRectangle) ((MyRectangle) selectedShape).clone();
 						Rectangle.x = xClick - Rectangle.width / 2;
@@ -277,7 +282,6 @@ public class PaintingPanel extends JPanel {
 					Rdrag.x = CurrX - Rdrag.width / 2;
 					Rdrag.y = CurrY - Rdrag.height / 2;
 					
-					((MyEllipse) selectedShape).x = CurrX - ((MyEllipse) selectedShape).width/2;
 				}
 
 				mainFrame.updateCoordinates(CurrX, CurrY);

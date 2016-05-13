@@ -79,6 +79,13 @@ public class ShapeDetails extends JPanel {
 		add(lblOutlilneColor);
 		
 		CopyBtn = new JButton("Copy");
+		CopyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(ShapeDetailsListener listener : listeners){
+					listener.copyBtnClicked();
+				}
+			}
+		});
 		CopyBtn.setBounds(20, 281, 80, 25);
 		add(CopyBtn);
 		CopyBtn.addActionListener(new ActionListener() {
