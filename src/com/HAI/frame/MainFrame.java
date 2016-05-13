@@ -28,6 +28,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.JCheckBox;
 
 public class MainFrame extends JFrame implements ShapeDetailsListener{
@@ -396,9 +399,25 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 	}
 
 	@Override
-	public void PanelActionOccurred() {
-		// TODO Auto-generated method stub
+	public void moveBtnClicked() {
 		panel.moveActionPerformed();
+		
+	}
+
+	@Override
+	public void rotateBtnClicked() {
+		// TODO Auto-generated method stub
+		String input = JOptionPane.showInputDialog("Please enter the degree");
+		int degree = 0;
+		try{
+			degree = Integer.parseInt(input);
+		
+		} catch (NumberFormatException e){
+			JOptionPane.showMessageDialog(this, "INPUT IS NOT AN INTEGER", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		panel.rotateActionPerformed(degree);
+		
 	}
 }
 
