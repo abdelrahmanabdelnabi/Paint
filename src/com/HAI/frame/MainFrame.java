@@ -112,11 +112,19 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		panel.setMainFrame(this);
 
 		detailsPanel = new ShapeDetails();
+		detailsPanel.lblY.setBounds(12, 96, 101, 15);
+		detailsPanel.lblX.setBounds(12, 62, 101, 15);
+		detailsPanel.HeightField.setBounds(120, 155, 80, 19);
+		detailsPanel.WidthField.setBounds(120, 128, 80, 19);
+		detailsPanel.YField.setBounds(120, 96, 80, 19);
+		detailsPanel.XField.setBounds(120, 62, 80, 19);
+		detailsPanel.TypeLabel.setBounds(55, 12, 101, 15);
 
 		getContentPane().add(detailsPanel);
 		detailsPanel.setVisible(false);
 
 		detailsPanel.setBounds(33, 236, detailsPanel.getPreferredSize().width, detailsPanel.getPreferredSize().height);
+		detailsPanel.setLayout(null);
 
 		detailsPanel.RegisterListener(this);
 
@@ -194,6 +202,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		bg.add(rdbtnEllipse);
 		bg.add(rdbtnRectangle);
 		bg.add(rdbtnSelect);
+		
 		rdbtnCircle.setSelected(true);
 
 		btnUndo = new JButton(Undo);
@@ -415,8 +424,11 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		int degree = 0;
 		try {
 			degree = Integer.parseInt(input);
+			
+		} catch (NumberFormatException e){
+			
 
-		} catch (NumberFormatException e) {
+
 			JOptionPane.showMessageDialog(this, "INPUT IS NOT AN INTEGER", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 
