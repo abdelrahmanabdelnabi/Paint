@@ -68,7 +68,7 @@ public class PaintingPanel extends JPanel {
 	//Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
 	//Stack<Shape> shapes2 = new Stack<Shape>();	// a drawn
 
-	ShapeHandler shapeHandlerObject = new ShapeHandler() ;
+	ShapeHandler shapeHandlerObject = ShapeHandler.getInstance() ;
 	public PaintingPanel() {
 		setLayout(null);
 
