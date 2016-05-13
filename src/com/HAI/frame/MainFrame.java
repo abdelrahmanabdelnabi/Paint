@@ -142,7 +142,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 
 
 		rdbtnCircle = new JRadioButton("circle");
-		rdbtnCircle.setBounds(29, 84, 53, 23);
+		rdbtnCircle.setBounds(29, 84, 67, 23);
 		getContentPane().add(rdbtnCircle);
 		
 		rdbtnCircle.addItemListener(new ItemListener() {
@@ -151,7 +151,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-				       rdbtnCircle.setBackground(Color.gray);
+				       
 				       
 				    }
 				    else if (e.getStateChange() == ItemEvent.DESELECTED) {
