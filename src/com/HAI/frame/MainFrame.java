@@ -443,7 +443,6 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 	@Override
 	public void deleteBtnClicked() {
 		panel.deleteActionPerformed();
-		
 	}
 	
 

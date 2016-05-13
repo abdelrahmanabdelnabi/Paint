@@ -418,6 +418,7 @@ public class PaintingPanel extends JPanel {
 		repaint();
 	}
 	
+	
 	public void thicknessChanged(int newThickness) {
 		currProp.setStroke(new BasicStroke(newThickness));
 	}

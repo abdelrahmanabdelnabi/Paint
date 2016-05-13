@@ -177,7 +177,6 @@ public class ShapeDetails extends JPanel {
 	
 	@Override
 	public Dimension getPreferredSize() {
-		// TODO Auto-generated method stub
 		return new Dimension(220, 400);
 	}
 	
