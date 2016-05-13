@@ -455,3 +455,4 @@ public class PaintingPanel extends JPanel {
 		this.mainFrame = mainFrame;
 	}
 }
+
