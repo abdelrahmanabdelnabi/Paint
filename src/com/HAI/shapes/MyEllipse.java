@@ -93,11 +93,11 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 
 	public Shape makeRotatedShape(int degree) {
 		AffineTransform at = new AffineTransform();
-		at.rotate(Math.toRadians(90), this.x + this.width / 2, this.y + this.height / 2);
+		at.rotate(Math.toRadians(degree), this.x + this.width / 2, this.y + this.height / 2);
 
 		// create a new transformed shape from this ellipse
 		Shape rotatedShape = at.createTransformedShape(this);
-
+		
 		return rotatedShape;
 	}
 

@@ -145,6 +145,7 @@ public class PaintingPanel extends JPanel {
 					selectedShape = getSelectedShape(xClick, yClick);
 
 					ShapeDetails sd = mainFrame.detailsPanel;
+					mainFrame.newShapeSelected();
 
 					if (selectedShape instanceof MyEllipse) {
 						((MyEllipse) selectedShape).updateDetailsPanel(sd);
@@ -264,8 +265,8 @@ public class PaintingPanel extends JPanel {
 			if (r instanceof MyRectangle) {
 				((MyRectangle) r).draw(g);
 			} else if (r instanceof MyEllipse) {
-				//((MyEllipse) r).draw(g);
-				((Graphics2D) g).draw(( (MyEllipse) r).makeRotatedShape(90));
+				((MyEllipse) r).draw(g);
+				//((Graphics2D) g).draw(( (MyEllipse) r).makeRotatedShape(90));
 				
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
