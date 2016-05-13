@@ -3,10 +3,12 @@ package src.com.HAI.frame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Shape;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
@@ -39,10 +41,6 @@ public class ShapeDetails extends JPanel {
 	public ShapeDetails() {
 		listeners = new ArrayList<ShapeDetailsListener>();
 		
-		
-		
-		
-	
 		setLayout(null);
 		
 		setBorder(new EtchedBorder());
@@ -78,6 +76,14 @@ public class ShapeDetails extends JPanel {
 		CopyBtn = new JButton("Copy");
 		CopyBtn.setBounds(20, 281, 80, 25);
 		add(CopyBtn);
+		CopyBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//notifyAllListeners();
+			}
+		});
 		
 		MoveBtn = new JButton("Move");
 		MoveBtn.addActionListener(new ActionListener() {
@@ -85,9 +91,10 @@ public class ShapeDetails extends JPanel {
 				notifyAllListeners();
 			}
 		});
-		
 		MoveBtn.setBounds(112, 281, 88, 25);
 		add(MoveBtn);
+		
+		
 		
 		RotateBtn = new JButton("Rotate");
 		RotateBtn.setBounds(20, 318, 82, 25);
@@ -124,6 +131,15 @@ public class ShapeDetails extends JPanel {
 		OutlineBtn = new JButton("Change");
 		OutlineBtn.setBounds(112, 230, 88, 25);
 		add(OutlineBtn);
+		OutlineBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Color newColor = null;
+				newColor = JColorChooser.showDialog(null, "Change Selected object Outline Color", newColor);
+			}
+		});
 
 	}
 	
