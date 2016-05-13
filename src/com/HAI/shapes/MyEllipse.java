@@ -27,7 +27,8 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	public MyEllipse() {
 		super();
 	}
-
+	
+	
 	public void updateDetailsPanel(ShapeDetails panel) {
 
 		panel.setShape(this);
@@ -39,6 +40,12 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 
 		panel.HeightField.setText(height + "");
 		panel.WidthField.setText(width + "");
+		panel.lblX.setText("X");
+        panel.lblY.setText("Y");
+        panel.lblWidth.setText("Width");
+		panel.lblHeight.setVisible(true);
+		panel.HeightField.setVisible(true);
+
 
 	}
 
@@ -50,6 +57,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		this.prop = prop;
 	}
 
+	
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
@@ -70,6 +78,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		}
 	}
 
+	
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
@@ -106,6 +115,8 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	public MyEllipse makeRotatedShape(int degree) {
 		AffineTransform at = new AffineTransform();
 		at.rotate(Math.toRadians(degree), this.x + this.width / 2, this.y + this.height / 2);
+		
+		
 
 		// create a new transformed shape from this ellipse
 		Shape rotatedShape = at.createTransformedShape(this);

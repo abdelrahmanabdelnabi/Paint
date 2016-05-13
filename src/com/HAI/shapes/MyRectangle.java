@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 
+import src.com.HAI.frame.ShapeDetails;
+
 public class MyRectangle extends Rectangle implements myShape{
 
 	private DrawingProperties prop = new DrawingProperties();
@@ -35,6 +37,26 @@ public class MyRectangle extends Rectangle implements myShape{
 		} finally {
 			g2d.dispose();
 		}
+	}
+	
+	public void updateDetailsPanel(ShapeDetails panel) {
+
+		panel.setShape(this);
+		panel.TypeLabel.setText("Quadrilateral");
+
+		panel.XField.setText((x + width / 2) + "");
+		panel.YField.setText(y + height / 2 + "");
+
+		panel.HeightField.setText(height + "");
+		panel.WidthField.setText(width + "");
+		
+        panel.lblX.setText("X");
+        panel.lblY.setText("Y");
+        panel.lblWidth.setText("Width");
+		panel.lblHeight.setVisible(true);
+		
+		panel.HeightField.setVisible(true);
+
 	}
 
 	public DrawingProperties getProp() {

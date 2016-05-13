@@ -70,7 +70,11 @@ public class PaintingPanel extends JPanel {
 	//Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
 	//Stack<Shape> shapes2 = new Stack<Shape>();	// a drawn
 
+
+
+
 	ShapeHandler shapeHandlerObject = ShapeHandler.getInstance();
+
 	public PaintingPanel() {
 		setLayout(null);
 
@@ -149,8 +153,12 @@ public class PaintingPanel extends JPanel {
 
 					if (selectedShape instanceof MyEllipse) {
 						((MyEllipse) selectedShape).updateDetailsPanel(sd);
-					} // else if rectangle...
-
+					}else if (selectedShape instanceof MyRectangle){
+						((MyRectangle) selectedShape).updateDetailsPanel(sd);
+					}else if (selectedShape instanceof MyTriangle){
+						((MyTriangle) selectedShape).updateDetailsPanel(sd);
+					}
+					
 				} else if (mainFrame.rdbtnTriangle.isSelected()) {
 					// triangle is selected so the user is trying to draw one
 					drawingTriangle = true;
