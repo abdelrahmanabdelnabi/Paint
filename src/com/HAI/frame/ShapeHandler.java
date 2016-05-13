@@ -11,7 +11,7 @@ import java.util.*;
 public class ShapeHandler {
 	
 
-	LinkedList<Shape> shapesList = new LinkedList<Shape>();
+	
 	Stack<LinkedList> shapes = new Stack<LinkedList>(); // a stack holding the shapes that are drawn
 	Stack<LinkedList> shapes2 = new Stack<LinkedList>();	
 	
@@ -38,6 +38,7 @@ public class ShapeHandler {
 		clonedList.add(S);
 		addList(clonedList);
 		}else {
+			LinkedList<Shape> shapesList = new LinkedList<Shape>();
 			shapesList.add(S);
 			addList(shapesList);
 		}
