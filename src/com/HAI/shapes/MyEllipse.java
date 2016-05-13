@@ -3,6 +3,7 @@ package src.com.HAI.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
@@ -91,14 +92,16 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 
 	}
 
-	public Shape makeRotatedShape(int degree) {
+	public MyEllipse makeRotatedShape(int degree) {
 		AffineTransform at = new AffineTransform();
 		at.rotate(Math.toRadians(degree), this.x + this.width / 2, this.y + this.height / 2);
 
 		// create a new transformed shape from this ellipse
 		Shape rotatedShape = at.createTransformedShape(this);
 		
-		return rotatedShape;
+		 Rectangle r =  rotatedShape.getBounds();
+		 MyEllipse rotatedEllipse = new MyEllipse(r.x, r.y, r.width, r.height);
+		return rotatedEllipse;
 	}
 
 	@Override
