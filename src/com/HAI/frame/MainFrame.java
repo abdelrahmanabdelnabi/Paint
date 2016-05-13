@@ -282,7 +282,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		HLChbx.setBounds(159, 138, 129, 23);
 		getContentPane().add(HLChbx);
 		JButton btnNewButton = new JButton("Clear All");
-		btnNewButton.setBounds(158, 192, 95, 23);
+		btnNewButton.setBounds(158, 192, 82, 23);
 		getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
