@@ -301,6 +301,7 @@ public class PaintingPanel extends JPanel {
 				CurrY = 0;
 				mainFrame.updateCoordinates(0, 0);
 			}
+			
 		});
 
 		this.addMouseMotionListener(new MouseAdapter() {
