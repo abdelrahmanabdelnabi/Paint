@@ -142,8 +142,8 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		ImageIcon outLine  = new ImageIcon(getClass().getResource("paint-brush.png"));
 
 
-		rdbtnCircle = new JRadioButton(circle);
-		rdbtnCircle.setBounds(29, 84, 24, 23);
+		rdbtnCircle = new JRadioButton("circle");
+		rdbtnCircle.setBounds(29, 84, 53, 23);
 		getContentPane().add(rdbtnCircle);
 		
 		rdbtnCircle.addItemListener(new ItemListener() {
