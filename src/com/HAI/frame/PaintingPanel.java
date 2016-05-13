@@ -257,7 +257,6 @@ public class PaintingPanel extends JPanel {
 				((MyRectangle) r).draw(g);
 			} else if (r instanceof MyEllipse) {
 				((MyEllipse) r).draw(g);
-				((MyEllipse) r).rotate(g);
 				
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
@@ -312,6 +311,11 @@ public class PaintingPanel extends JPanel {
 		repaint();
 	}
 
+	public void clearActionPerformed (){
+		while(!shapes.isEmpty()){
+			shapes.pop();
+		}
+	}
 	public void moveActionPerformed() {
 		if (selectedShape instanceof MyEllipse) {
 			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();

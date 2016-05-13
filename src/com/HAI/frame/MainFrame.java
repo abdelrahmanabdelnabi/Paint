@@ -10,13 +10,20 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
+<<<<<<< HEAD
 import javax.swing.Icon;
+=======
+import javax.swing.ImageIcon;
+>>>>>>> branch 'master' of https://github.com/abdelrahmanabdelnabi/Paint
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
@@ -100,7 +107,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 
 		panel = new PaintingPanel();
 		panel.setSize(800, 575);
-		panel.setLocation(325, 92);
+		panel.setLocation(325, 100);
 		panel.setBorder(new EtchedBorder());
 		panel.setLayout(new BorderLayout(0, 0));
 
@@ -126,10 +133,37 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 	}
 
 	private void initButtons() {
+		
+		ImageIcon circle  = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Ellipse  = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Rectangle  = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Square  = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Undo  = new ImageIcon(getClass().getResource("back_undo.png"));
+		ImageIcon Redo  = new ImageIcon(getClass().getResource("redo_forward.png"));
+		ImageIcon Erase  = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Fill  = new ImageIcon(getClass().getResource("color_fill.png"));
+		ImageIcon outLine  = new ImageIcon(getClass().getResource("paint-brush.png"));
 
-		rdbtnCircle = new JRadioButton("circle");
-		rdbtnCircle.setBounds(29, 84, 102, 23);
+
+		rdbtnCircle = new JRadioButton(circle);
+		rdbtnCircle.setBounds(29, 84, 24, 23);
 		getContentPane().add(rdbtnCircle);
+		
+		rdbtnCircle.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+				       rdbtnCircle.setBackground(Color.gray);
+				       
+				    }
+				    else if (e.getStateChange() == ItemEvent.DESELECTED) {
+				    	rdbtnCircle.setBackground(null);
+				    }
+				
+			}
+		});
 
 		rdbtnSquare = new JRadioButton("square");
 		rdbtnSquare.setBounds(29, 111, 102, 23);
@@ -148,7 +182,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		getContentPane().add(rdbtnRectangle);
 
 		rdbtnSelect = new JRadioButton("Select");
-		rdbtnSelect.setBounds(154, 192, 77, 23);
+		rdbtnSelect.setBounds(158, 165, 77, 23);
 		getContentPane().add(rdbtnSelect);
 		
 		bg.add(rdbtnSquare);
@@ -157,28 +191,31 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		bg.add(rdbtnEllipse);
 		bg.add(rdbtnRectangle);
 		bg.add(rdbtnSelect);
+<<<<<<< HEAD
 		
 
+=======
+>>>>>>> branch 'master' of https://github.com/abdelrahmanabdelnabi/Paint
 		rdbtnCircle.setSelected(true);
 
-		btnUndo = new JButton("undo");
+		btnUndo = new JButton(Undo);
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.undoActionPerformed();
 
 			}
 		});
-		btnUndo.setBounds(863, 29, 89, 23);
+		btnUndo.setBounds(38, 12, 24, 23);
 		getContentPane().add(btnUndo);
 		
-		btnRedo = new JButton("redo");
+		btnRedo = new JButton(Redo);
 		btnRedo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.redoActionPerformed();
 
 			}
 		});
-		btnRedo.setBounds(990, 29, 89, 23);
+		btnRedo.setBounds(72, 12, 24, 23);
 		getContentPane().add(btnRedo);
 
 		thickness = new JSlider();
@@ -186,7 +223,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		thickness.setMaximum(8);
 		thickness.setMinimum(1);
 		thickness.setToolTipText("Drawing Pen Thickness");
-		thickness.setBounds(202, 29, 200, 16);
+		thickness.setBounds(360, 27, 200, 16);
 		getContentPane().add(thickness);
 		thickness.addChangeListener(new ChangeListener() {
 
@@ -197,7 +234,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 			}
 		});
 
-		btnOutlineColor = new JButton("change outline color");
+		btnOutlineColor = new JButton(outLine);
 		btnOutlineColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Color newColor = null;
@@ -208,10 +245,10 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 				panel.outlineColorChanged(newColor);
 			}
 		});
-		btnOutlineColor.setBounds(431, 28, 192, 25);
+		btnOutlineColor.setBounds(580, 11, 192, 25);
 		getContentPane().add(btnOutlineColor);
 
-		btnFillColor = new JButton("change fill color");
+		btnFillColor = new JButton(Fill);
 		btnFillColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -223,38 +260,49 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 				panel.fillColorChanged(newColor);
 			}
 		});
-		btnFillColor.setBounds(668, 28, 146, 25);
+		btnFillColor.setBounds(783, 12, 192, 25);
 		getContentPane().add(btnFillColor);
 		btnFillColor.getModel().setPressed(true);
 
 		XField = new JTextField();
 		XField.setEditable(false);
-		XField.setBounds(214, 90, 53, 19);
+		XField.setBounds(205, 84, 53, 19);
 		getContentPane().add(XField);
 		XField.setColumns(10);
 
 		YField = new JTextField();
 		YField.setEditable(false);
 		YField.setColumns(10);
-		YField.setBounds(214, 121, 53, 19);
+		YField.setBounds(205, 115, 53, 19);
 		getContentPane().add(YField);
 
 		JLabel lblX = new JLabel("X:");
-		lblX.setBounds(183, 90, 29, 15);
+		lblX.setBounds(174, 84, 29, 15);
 		getContentPane().add(lblX);
 
 		lblY = new JLabel("Y:");
-		lblY.setBounds(183, 121, 29, 15);
+		lblY.setBounds(174, 115, 29, 15);
 		getContentPane().add(lblY);
 
 		lblThickness = new JLabel("Thickness");
-		lblThickness.setBounds(112, 29, 89, 23);
+		lblThickness.setBounds(259, 12, 89, 23);
 		getContentPane().add(lblThickness);
 
 		HLChbx = new JCheckBox("Helping Lines");
-		HLChbx.setBounds(148, 148, 129, 23);
+		HLChbx.setBounds(159, 138, 129, 23);
 		getContentPane().add(HLChbx);
-		
+		JButton btnNewButton = new JButton("Clear All");
+		btnNewButton.setBounds(158, 192, 82, 23);
+		getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane optionPane = new JOptionPane("Are you sure to Clear all ?" ,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
+				int choice = JOptionPane.showConfirmDialog(optionPane,"Are you sure to Clear all ?" ) ;
+				if (choice== JOptionPane.YES_OPTION){
+					panel.clearActionPerformed();
+				}
+			}
+		});
 
 	}
 
