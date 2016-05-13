@@ -2,19 +2,13 @@ package src.com.HAI.frame;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 import java.util.LinkedList;
-import java.util.Stack;
 
-import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
 import src.com.HAI.shapes.DrawingProperties;
@@ -57,6 +51,9 @@ public class PaintingPanel extends JPanel {
 	private MyEllipse Edrag = new MyEllipse(); // an instance of the ellipse
 												// that is drawn while draggin
 												// the ellipse
+	private MyTriangle Tdrag = new MyTriangle();
+	
+	// a reference to the selected shape when the user clicks on a shape to select it
 	public Shape selectedShape;
 
 	private int[] xpoints = new int[3]; // an array of x and y coordinates of
@@ -279,6 +276,8 @@ public class PaintingPanel extends JPanel {
 					Edrag.y = CurrY - Edrag.height / 2;
 					Rdrag.x = CurrX - Rdrag.width / 2;
 					Rdrag.y = CurrY - Rdrag.height / 2;
+					
+					((MyEllipse) selectedShape).x = CurrX - ((MyEllipse) selectedShape).width/2;
 				}
 
 				mainFrame.updateCoordinates(CurrX, CurrY);
@@ -320,6 +319,8 @@ public class PaintingPanel extends JPanel {
 				((Graphics2D) g).draw((Shape) Edrag);
 			else if (selectedShape instanceof MyRectangle)
 				((Graphics2D) g).draw((Shape) Rdrag);
+			
+			((Graphics2D) g).draw(selectedShape);
 
 		}
 
@@ -361,8 +362,8 @@ public class PaintingPanel extends JPanel {
 			Rdrag = (MyRectangle) ((MyRectangle) selectedShape).clone();
 			moving = true;
 
-			repaint();
 		}
+		repaint();
 	}
 
 	public void copyActionPerformed() {
@@ -455,4 +456,3 @@ public class PaintingPanel extends JPanel {
 		this.mainFrame = mainFrame;
 	}
 }
-

@@ -10,6 +10,8 @@ public class ShapeFactory {
 	
 	static DrawingProperties prop;
 	
+	static int rotationAngle;
+	
 	public static void setXpoints(int[] xpoints) {
 		ShapeFactory.xpoints = xpoints;
 	}
@@ -27,6 +29,10 @@ public class ShapeFactory {
 		y = ypoint;
 	}
 	
+	public static void setRotationAngle(int rotationAngle) {
+		ShapeFactory.rotationAngle = rotationAngle;
+	}
+
 	public static void setSize(int w, int h){
 		width = w;
 		height = h;
