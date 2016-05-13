@@ -81,6 +81,7 @@ public class ShapeDetails extends JPanel {
 				notifyAllListeners();
 			}
 		});
+		
 		MoveBtn.setBounds(112, 281, 88, 25);
 		add(MoveBtn);
 		
