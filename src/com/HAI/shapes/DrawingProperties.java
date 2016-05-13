@@ -6,7 +6,7 @@ import java.awt.Color;
 public class DrawingProperties implements Cloneable{
 
 	private Color outline = Color.black;
-	private Color fill = java.awt.Color.yellow;
+	private Color fill = java.awt.Color.white;
 	private BasicStroke stroke = new BasicStroke(3);
 	
 	public DrawingProperties(){

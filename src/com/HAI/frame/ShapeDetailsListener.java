@@ -1,5 +1,7 @@
 package src.com.HAI.frame;
 
+import java.awt.Color;
+
 public interface ShapeDetailsListener {
 
 	
@@ -12,4 +14,8 @@ public interface ShapeDetailsListener {
 	public void deleteBtnClicked();
 	
 	public void copyBtnClicked();
+	
+	public void fillBtnClicked(Color c);
+	
+	public void outlineBtnClicked(Color c);
 }

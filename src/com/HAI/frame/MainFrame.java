@@ -450,6 +450,19 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		panel.copyActionPerformed();
 		
 	}
+
+	@Override
+	public void fillBtnClicked(Color c) {
+		// TODO Auto-generated method stub
+		panel.shapeFillChanged(c);
+		
+	}
+
+	@Override
+	public void outlineBtnClicked(Color c) {
+		// TODO Auto-generated method stub
+		panel.shapeOutlineChanged(c);
+	}
 }
 
 class HolderPanel extends JPanel {
