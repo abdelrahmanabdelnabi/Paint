@@ -130,4 +130,16 @@ public class MyTriangle extends Polygon implements myShape {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		MyTriangle cloned = new MyTriangle(xpoints, ypoints, 3);
+		
+		cloned.setProp((DrawingProperties) prop.clone());
+		
+		cloned.rotationAngle = this.rotationAngle;
+		
+		return cloned;
+	}
 }

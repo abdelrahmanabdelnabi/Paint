@@ -67,11 +67,9 @@ public class PaintingPanel extends JPanel {
 	private int clicks = 0; // the number of clicks clicked when drawing a
 							// triangle
 
-	//Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
-	//Stack<Shape> shapes2 = new Stack<Shape>();	// a drawn
-
-
-
+	// Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes
+	// that
+	// Stack<Shape> shapes2 = new Stack<Shape>(); // a drawn
 
 	ShapeHandler shapeHandlerObject = ShapeHandler.getInstance();
 
@@ -107,7 +105,6 @@ public class PaintingPanel extends JPanel {
 
 					r.setProp(cloned);
 					shapeHandlerObject.addShape(r);
-					
 
 				} else if (mainFrame.rdbtnEllipse.isSelected()) {
 					MyEllipse ellipse = new MyEllipse(Math.min(x, fx), Math.min(y, fy), Math.abs(fx - x),
@@ -120,7 +117,7 @@ public class PaintingPanel extends JPanel {
 
 					r.setProp(cloned);
 					shapeHandlerObject.addShape(r);
-					} else if (mainFrame.rdbtnCircle.isSelected()) {
+				} else if (mainFrame.rdbtnCircle.isSelected()) {
 					MyEllipse ellipse = (MyEllipse) Edrag.clone();
 
 					ellipse.setProp(cloned);
@@ -128,10 +125,7 @@ public class PaintingPanel extends JPanel {
 				}
 
 				repaint();
-				
-				
-				
-				
+
 			}
 
 			public void mouseClicked(MouseEvent e) {
@@ -148,19 +142,18 @@ public class PaintingPanel extends JPanel {
 						MyRectangle Rectangle = (MyRectangle) ((MyRectangle) selectedShape).clone();
 						Rectangle.x = xClick - Rectangle.width / 2;
 						Rectangle.y = yClick - Rectangle.height / 2;
-						
+
 						shapeHandlerObject.cloneShape(Rectangle, selectedShape);
 
 						moving = false;
 					}
 
-					
-				}else if  (copying == true){
+				} else if (copying == true) {
 					if (selectedShape instanceof MyEllipse) {
 						MyEllipse Ellipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
 						Ellipse.x = xClick - Ellipse.width / 2;
 						Ellipse.y = yClick - Ellipse.height / 2;
-						
+
 						shapeHandlerObject.addShape(Ellipse);
 
 						copying = false;
@@ -168,12 +161,12 @@ public class PaintingPanel extends JPanel {
 						MyRectangle Rectangle = (MyRectangle) ((MyRectangle) selectedShape).clone();
 						Rectangle.x = xClick - Rectangle.width / 2;
 						Rectangle.y = yClick - Rectangle.height / 2;
-						
+
 						shapeHandlerObject.addShape(Rectangle);
 
 						copying = false;
 					}
-					
+
 				} else if (mainFrame.rdbtnSelect.isSelected()) {
 					selectedShape = getSelectedShape(xClick, yClick);
 
@@ -182,12 +175,12 @@ public class PaintingPanel extends JPanel {
 
 					if (selectedShape instanceof MyEllipse) {
 						((MyEllipse) selectedShape).updateDetailsPanel(sd);
-					}else if (selectedShape instanceof MyRectangle){
+					} else if (selectedShape instanceof MyRectangle) {
 						((MyRectangle) selectedShape).updateDetailsPanel(sd);
-					}else if (selectedShape instanceof MyTriangle){
+					} else if (selectedShape instanceof MyTriangle) {
 						((MyTriangle) selectedShape).updateDetailsPanel(sd);
 					}
-					
+
 				} else if (mainFrame.rdbtnTriangle.isSelected()) {
 					// triangle is selected so the user is trying to draw one
 					drawingTriangle = true;
@@ -269,9 +262,9 @@ public class PaintingPanel extends JPanel {
 				}
 
 				dragging = true;
-				
+
 				mainFrame.updateCoordinates(e.getX(), e.getY());
-				
+
 				repaint();
 			}
 
@@ -304,15 +297,8 @@ public class PaintingPanel extends JPanel {
 				((MyRectangle) r).draw(g);
 			} else if (r instanceof MyEllipse) {
 				((MyEllipse) r).draw(g);
-				//((Graphics2D) g).draw(( (MyEllipse) r).makeRotatedShape(90));
-				
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
-			}else{
-				g.setColor(Color.red);
-				((Graphics2D) g).fill(r);
-				g.setColor(Color.black);
-				((Graphics2D) g).draw(r);
 			}
 		}
 
@@ -350,76 +336,77 @@ public class PaintingPanel extends JPanel {
 	}
 
 	public void undoActionPerformed() {
-		
+
 		shapeHandlerObject.Undo();
 		repaint();
 	}
-	
+
 	public void redoActionPerformed() {
-	  shapeHandlerObject.Redo();
+		shapeHandlerObject.Redo();
 		repaint();
 	}
 
-	public void clearActionPerformed (){
+	public void clearActionPerformed() {
 		shapeHandlerObject.clear();
 		repaint();
 	}
+
 	public void moveActionPerformed() {
 		if (selectedShape instanceof MyEllipse) {
 			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
 			moving = true;
 
-			
 			repaint();
-		}
-		else if (selectedShape instanceof MyRectangle) {
+		} else if (selectedShape instanceof MyRectangle) {
 			Rdrag = (MyRectangle) ((MyRectangle) selectedShape).clone();
 			moving = true;
-			
+
 			repaint();
 		}
 	}
-	
+
 	public void copyActionPerformed() {
 		if (selectedShape instanceof MyEllipse) {
 			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
 			copying = true;
-			
+
 			repaint();
-		}
-		else if (selectedShape instanceof MyRectangle) {
+		} else if (selectedShape instanceof MyRectangle) {
 			Rdrag = (MyRectangle) ((MyRectangle) selectedShape).clone();
 			copying = true;
-			
+
 			repaint();
 		}
 	}
-	
-	public void rotateActionPerformed(int degree){
+
+	public void rotateActionPerformed(int degree) {
+
 		if (selectedShape instanceof MyEllipse) {
-			
-			
-			LinkedList<Shape> list = shapeHandlerObject.getTop();
-			LinkedList<Shape> clonedlist = (LinkedList<Shape>) list.clone();
-			
-			for(Shape s : clonedlist){
-				if(selectedShape == s){
-					clonedlist.remove(s);
-					
-					MyEllipse newEllipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
-					newEllipse.modifyRotationAngle(degree);
-					clonedlist.add(newEllipse);
-					shapeHandlerObject.setTop(clonedlist);
-					System.out.println("found match");
-					break;
-					
-				}
+			MyEllipse newEllipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
+			newEllipse.modifyRotationAngle(degree);
+			shapeHandlerObject.cloneShape(newEllipse, selectedShape);
+
+		} else if (selectedShape instanceof MyRectangle) {
+			MyRectangle newRect = (MyRectangle) ((MyRectangle) selectedShape).clone();
+			newRect.modifyRotationAngle(degree);
+
+			shapeHandlerObject.cloneShape(newRect, selectedShape);
+		} else if (selectedShape instanceof MyTriangle) {
+			MyTriangle newTri = null;
+			try {
+				newTri = (MyTriangle) ((MyTriangle) selectedShape).clone();
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-			repaint();
+
+			newTri.modifyRotationAngle(degree);
+
+			shapeHandlerObject.cloneShape(newTri, selectedShape);
 		}
+		repaint();
 	}
-	
+
 	public void thicknessChanged(int newThickness) {
 		currProp.setStroke(new BasicStroke(newThickness));
 	}
@@ -446,7 +433,6 @@ public class PaintingPanel extends JPanel {
 
 		return selected;
 	}
-	
 
 	public void setMainFrame(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
