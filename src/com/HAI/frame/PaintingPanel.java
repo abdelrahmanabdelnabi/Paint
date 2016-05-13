@@ -217,7 +217,6 @@ public class PaintingPanel extends JPanel {
 
 						// the user finished drawing the triangle
 						drawingTriangle = false;
-
 					}
 				}
 
