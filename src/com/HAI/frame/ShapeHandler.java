@@ -72,5 +72,19 @@ public class ShapeHandler {
 		while(!shapes2.isEmpty())
 			shapes2.pop();
 	}
+	public void cloneShape(Shape added, Shape Selected){
+		LinkedList<Shape> list = getTop();
+		LinkedList<Shape> clonedlist = (LinkedList<Shape>) list.clone();
+		
+		for(Shape X : clonedlist){
+			if(Selected == X){
+				clonedlist.remove(X);
+				clonedlist.add(added);
+				setTop(clonedlist);
+				System.out.println("found match");
+				break;
+			}
+		}
+	}
 	
 }

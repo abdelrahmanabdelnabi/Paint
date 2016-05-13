@@ -131,18 +131,32 @@ public class PaintingPanel extends JPanel {
 				
 				
 			}
-
+			
 			public void mouseClicked(MouseEvent e) {
 				int xClick = e.getX();
 				int yClick = e.getY();
 
 				if (moving == true) {
 					if (selectedShape instanceof MyEllipse) {
-						((MyEllipse) selectedShape).x = xClick - ((MyEllipse) selectedShape).width / 2;
-						((MyEllipse) selectedShape).y = yClick - ((MyEllipse) selectedShape).height / 2;
+						MyEllipse Ellipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
+						Ellipse.x = xClick - Ellipse.width / 2;
+						Ellipse.y = yClick - Ellipse.height / 2;
+						
+						shapeHandlerObject.cloneShape(Ellipse, selectedShape);
 
 						moving = false;
 					}
+				}else if  (copying == true){
+					if (selectedShape instanceof MyEllipse) {
+						MyEllipse Ellipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
+						Ellipse.x = xClick - Ellipse.width / 2;
+						Ellipse.y = yClick - Ellipse.height / 2;
+						
+						shapeHandlerObject.addShape(Ellipse);
+
+						copying = false;
+					}
+					
 				} else if (mainFrame.rdbtnSelect.isSelected()) {
 					selectedShape = getSelectedShape(xClick, yClick);
 
@@ -329,28 +343,24 @@ public class PaintingPanel extends JPanel {
 		if (selectedShape instanceof MyEllipse) {
 			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
 			moving = true;
+			
+			repaint();
+		}
+	}
+	
+	public void copyActionPerformed() {
+		if (selectedShape instanceof MyEllipse) {
+			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
+			copying = true;
+			
+			repaint();
 		}
 	}
 	
 	public void rotateActionPerformed(int degree){
 		if (selectedShape instanceof MyEllipse) {
-			
 			Shape rotated = ((MyEllipse) selectedShape).makeRotatedShape(degree);
-			
-			LinkedList<Shape> list = shapeHandlerObject.getTop();
-			LinkedList<Shape> clonedlist = (LinkedList<Shape>) list.clone();
-			
-			for(Shape s : clonedlist){
-				if(selectedShape == s){
-					clonedlist.remove(s);
-					clonedlist.add(rotated);
-					shapeHandlerObject.setTop(clonedlist);
-					System.out.println("found match");
-					break;
-					
-				}
-			}
-			
+			shapeHandlerObject.cloneShape(rotated, selectedShape);
 			repaint();
 		}
 	}
