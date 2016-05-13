@@ -24,6 +24,7 @@ public class ShapeHandler {
 	}
 	
 	public void Redo() {
+	
 		if (!shapes2.isEmpty()) {
 			System.out.print("size before = " + shapes2.size());
 			shapes.push(shapes2.pop());

@@ -122,6 +122,10 @@ public class PaintingPanel extends JPanel {
 				}
 
 				repaint();
+				
+				
+				
+				
 			}
 
 			public void mouseClicked(MouseEvent e) {
