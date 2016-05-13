@@ -10,10 +10,16 @@ import java.util.*;
 
 public class ShapeHandler {
 	
-
+	private static ShapeHandler ShapeHandlerInstance = new ShapeHandler();
+	
+	private ShapeHandler(){}
 	
 	Stack<LinkedList> shapes = new Stack<LinkedList>(); // a stack holding the shapes that are drawn
 	Stack<LinkedList> shapes2 = new Stack<LinkedList>();	
+	
+	public static ShapeHandler getInstance(){
+	      return ShapeHandlerInstance;
+	}
 	
 	public void Undo() {
 		if (!shapes.isEmpty()) {
@@ -37,10 +43,12 @@ public class ShapeHandler {
 		LinkedList<Shape> clonedList = (LinkedList<Shape>) shapesList.clone();
 		clonedList.add(S);
 		addList(clonedList);
+		emptyStack();
 		}else {
 			LinkedList<Shape> shapesList = new LinkedList<Shape>();
 			shapesList.add(S);
 			addList(shapesList);
+			emptyStack();
 		}
 	}
 	private void addList(LinkedList<Shape> list){
@@ -59,6 +67,10 @@ public class ShapeHandler {
 		while(!shapes.isEmpty()){
 			shapes.pop();
 		}
+	}
+	private void emptyStack(){
+		while(!shapes2.isEmpty())
+			shapes2.pop();
 	}
 	
 }
