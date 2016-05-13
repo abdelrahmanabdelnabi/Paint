@@ -121,6 +121,13 @@ public class ShapeDetails extends JPanel {
 		add(RotateBtn);
 		
 		DeleteBtn = new JButton("Delete");
+		DeleteBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(ShapeDetailsListener listener : listeners){
+					listener.deleteBtnClicked();
+				}
+			}
+		});
 		DeleteBtn.setBounds(112, 318, 88, 25);
 		add(DeleteBtn);
 		

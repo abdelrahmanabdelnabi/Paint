@@ -311,11 +311,6 @@ public class PaintingPanel extends JPanel {
 				
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
-			}else{
-				g.setColor(Color.red);
-				((Graphics2D) g).fill(r);
-				g.setColor(Color.black);
-				((Graphics2D) g).draw(r);
 			}
 		}
 
@@ -405,6 +400,22 @@ public class PaintingPanel extends JPanel {
 
 			repaint();
 		}
+	}
+	
+	public void deleteActionPerformed() {
+		LinkedList<Shape> list = shapeHandlerObject.getTop();
+		LinkedList<Shape> clonedlist = (LinkedList<Shape>) list.clone();
+		
+		for(Shape s : clonedlist){
+			if(selectedShape == s){
+				clonedlist.remove(s);
+				shapeHandlerObject.setTop(clonedlist);
+				System.out.println("found match");
+				break;
+				
+			}
+		}
+		repaint();
 	}
 	
 	public void thicknessChanged(int newThickness) {

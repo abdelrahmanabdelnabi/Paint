@@ -442,7 +442,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 
 	@Override
 	public void deleteBtnClicked() {
-		// TODO Auto-generated method stub
+		panel.deleteActionPerformed();
 		
 	}
 	
