@@ -3,7 +3,6 @@ package src.com.HAI.frame;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,9 +13,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,11 +28,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import jdk.nashorn.internal.scripts.JO;
-
-import javax.swing.JCheckBox;
-
-public class MainFrame extends JFrame implements ShapeDetailsListener{
+public class MainFrame extends JFrame implements ShapeDetailsListener {
 
 	private PaintingPanel panel;
 	private JPanel holderPanel; // a panel to hold all the components of the
@@ -115,13 +110,14 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 
 		getContentPane().add(panel);
 		panel.setMainFrame(this);
-		
+
 		detailsPanel = new ShapeDetails();
-		
+
 		getContentPane().add(detailsPanel);
-		
-		detailsPanel.setBounds(33,236, detailsPanel.getPreferredSize().width, detailsPanel.getPreferredSize().height);
-		
+		detailsPanel.setVisible(false);
+
+		detailsPanel.setBounds(33, 236, detailsPanel.getPreferredSize().width, detailsPanel.getPreferredSize().height);
+
 		detailsPanel.RegisterListener(this);
 
 		initButtons();
@@ -133,35 +129,32 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 	}
 
 	private void initButtons() {
-		
-		ImageIcon circle  = new ImageIcon(getClass().getResource("circle-outline.png"));
-		ImageIcon Ellipse  = new ImageIcon(getClass().getResource("circle-outline.png"));
-		ImageIcon Rectangle  = new ImageIcon(getClass().getResource("circle-outline.png"));
-		ImageIcon Square  = new ImageIcon(getClass().getResource("circle-outline.png"));
-		ImageIcon Undo  = new ImageIcon(getClass().getResource("back_undo.png"));
-		ImageIcon Redo  = new ImageIcon(getClass().getResource("redo_forward.png"));
-		ImageIcon Erase  = new ImageIcon(getClass().getResource("circle-outline.png"));
-		ImageIcon Fill  = new ImageIcon(getClass().getResource("color_fill.png"));
-		ImageIcon outLine  = new ImageIcon(getClass().getResource("paint-brush.png"));
 
+		ImageIcon circle = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Ellipse = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Rectangle = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Square = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Undo = new ImageIcon(getClass().getResource("back_undo.png"));
+		ImageIcon Redo = new ImageIcon(getClass().getResource("redo_forward.png"));
+		ImageIcon Erase = new ImageIcon(getClass().getResource("circle-outline.png"));
+		ImageIcon Fill = new ImageIcon(getClass().getResource("color_fill.png"));
+		ImageIcon outLine = new ImageIcon(getClass().getResource("paint-brush.png"));
 
 		rdbtnCircle = new JRadioButton("circle");
 		rdbtnCircle.setBounds(29, 84, 67, 23);
 		getContentPane().add(rdbtnCircle);
-		
+
 		rdbtnCircle.addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-				       
-				       
-				    }
-				    else if (e.getStateChange() == ItemEvent.DESELECTED) {
-				    	rdbtnCircle.setBackground(null);
-				    }
-				
+
+				} else if (e.getStateChange() == ItemEvent.DESELECTED) {
+					rdbtnCircle.setBackground(null);
+				}
+
 			}
 		});
 
@@ -183,8 +176,18 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 
 		rdbtnSelect = new JRadioButton("Select");
 		rdbtnSelect.setBounds(158, 165, 77, 23);
+		rdbtnSelect.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(!rdbtnSelect.isSelected()){
+					detailsPanel.setVisible(false);
+				}
+
+			}
+		});
 		getContentPane().add(rdbtnSelect);
-		
+
 		bg.add(rdbtnSquare);
 		bg.add(rdbtnCircle);
 		bg.add(rdbtnTriangle);
@@ -202,7 +205,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		});
 		btnUndo.setBounds(38, 12, 24, 23);
 		getContentPane().add(btnUndo);
-		
+
 		btnRedo = new JButton(Redo);
 		btnRedo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -290,9 +293,10 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane optionPane = new JOptionPane("Are you sure to Clear all ?" ,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-				int choice = JOptionPane.showConfirmDialog(optionPane,"Are you sure to Clear all ?" ) ;
-				if (choice== JOptionPane.YES_OPTION){
+				JOptionPane optionPane = new JOptionPane("Are you sure to Clear all ?", JOptionPane.QUESTION_MESSAGE,
+						JOptionPane.YES_NO_OPTION);
+				int choice = JOptionPane.showConfirmDialog(optionPane, "Are you sure to Clear all ?");
+				if (choice == JOptionPane.YES_OPTION) {
 					panel.clearActionPerformed();
 				}
 			}
@@ -307,8 +311,8 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		YField.setText(y + "");
 
 		// repaint the rulers
-		repaint(r.x, r.y + TBTHICKNESS - 2*RULERTHICKNESS - GAP, r.width, 2*RULERTHICKNESS);
-		repaint(r.x - 2*RULERTHICKNESS - GAP, r.y + TBTHICKNESS, 2*RULERTHICKNESS, r.height);
+		repaint(r.x, r.y + TBTHICKNESS - 2 * RULERTHICKNESS - GAP, r.width, 2 * RULERTHICKNESS);
+		repaint(r.x - 2 * RULERTHICKNESS - GAP, r.y + TBTHICKNESS, 2 * RULERTHICKNESS, r.height);
 	}
 
 	@Override
@@ -401,7 +405,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 	@Override
 	public void moveBtnClicked() {
 		panel.moveActionPerformed();
-		
+
 	}
 
 	@Override
@@ -409,14 +413,30 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		// TODO Auto-generated method stub
 		String input = JOptionPane.showInputDialog("Please enter the degree");
 		int degree = 0;
-		try{
+		try {
 			degree = Integer.parseInt(input);
-		
-		} catch (NumberFormatException e){
+
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "INPUT IS NOT AN INTEGER", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 		panel.rotateActionPerformed(degree);
+
+	}
+
+	public void newShapeSelected() {
+		detailsPanel.setVisible(true);
+	}
+
+	@Override
+	public void deleteBtnClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void copyBtnClicked() {
+		// TODO Auto-generated method stub
 		
 	}
 }
