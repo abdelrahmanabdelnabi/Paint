@@ -4,8 +4,10 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 
 import src.com.HAI.frame.ShapeDetails;
 
@@ -13,6 +15,20 @@ public class MyTriangle extends Polygon implements myShape {
 
 	DrawingProperties prop = new DrawingProperties();
 	
+	int rotationAngle = 0;
+	
+	public void modifyRotationAngle(int rotationAngle) {
+		this.rotationAngle += rotationAngle;
+		this.rotationAngle %= 360;
+	}
+		
+	public int calculateCenterX(){
+		return (xpoints[0]+ xpoints[1]+ xpoints[2])/3;
+	}
+	
+	public int calculateCenterY(){
+		return (ypoints[0] + ypoints[1] + ypoints[2])/3;
+	}
 	
 	public MyTriangle() {
 		super();
@@ -24,12 +40,15 @@ public class MyTriangle extends Polygon implements myShape {
 
 	public void draw(Graphics g) {
 
-		final Graphics2D g2d = (Graphics2D) g.create();
+		Graphics2D g2d = (Graphics2D) g.create();
 		try {
 			
-            fill(g2d);
-		    outline(g2d);
+			if (rotationAngle != 0) {
+				g2d = rotate(g2d, rotationAngle);
+			}
 			
+			fill(g2d);
+			outline(g2d);
 			g2d.draw(this);
 
 		} finally {
@@ -50,10 +69,6 @@ public class MyTriangle extends Polygon implements myShape {
 		panel.WidthField.setText(xpoints[2] + " , "+ ypoints[2]+"");
 		panel.HeightField.setVisible(false);
 		panel.lblHeight.setVisible(false);
-		
-		
-		
- 
 	}
 	
 	
@@ -89,7 +104,13 @@ public class MyTriangle extends Polygon implements myShape {
 
 	@Override
 	public Graphics2D rotate(Graphics2D g, int degree) {
-		return g;
+		AffineTransform at = new AffineTransform();
+		at.rotate(Math.toRadians(degree),calculateCenterX(), calculateCenterY());
+
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.transform(at);
+
+		return g2d;
 		
 	}
 
