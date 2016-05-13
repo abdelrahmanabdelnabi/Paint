@@ -286,7 +286,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane optionPane = new JOptionPane("Are you sure to Clear all ?" ,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_OPTION);
+				JOptionPane optionPane = new JOptionPane("Are you sure to Clear all ?" ,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
 				int choice = JOptionPane.showConfirmDialog(optionPane,"Are you sure to Clear all ?" ) ;
 				if (choice== JOptionPane.YES_OPTION){
 					panel.clearActionPerformed();
