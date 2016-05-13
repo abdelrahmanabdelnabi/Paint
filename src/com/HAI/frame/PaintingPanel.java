@@ -147,7 +147,16 @@ public class PaintingPanel extends JPanel {
 						shapeHandlerObject.cloneShape(Ellipse, selectedShape);
 
 						moving = false;
+					} else if (selectedShape instanceof MyRectangle) {
+						MyRectangle Rectangle = (MyRectangle) ((MyRectangle) selectedShape).clone();
+						Rectangle.x = xClick - Rectangle.width / 2;
+						Rectangle.y = yClick - Rectangle.height / 2;
+						
+						shapeHandlerObject.cloneShape(Rectangle, selectedShape);
+
+						moving = false;
 					}
+					
 				}else if  (copying == true){
 					if (selectedShape instanceof MyEllipse) {
 						MyEllipse Ellipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
@@ -155,6 +164,14 @@ public class PaintingPanel extends JPanel {
 						Ellipse.y = yClick - Ellipse.height / 2;
 						
 						shapeHandlerObject.addShape(Ellipse);
+
+						copying = false;
+					} else if (selectedShape instanceof MyRectangle) {
+						MyRectangle Rectangle = (MyRectangle) ((MyRectangle) selectedShape).clone();
+						Rectangle.x = xClick - Rectangle.width / 2;
+						Rectangle.y = yClick - Rectangle.height / 2;
+						
+						shapeHandlerObject.addShape(Rectangle);
 
 						copying = false;
 					}
@@ -271,6 +288,8 @@ public class PaintingPanel extends JPanel {
 				if (moving || copying) {
 					Edrag.x = CurrX - Edrag.width / 2;
 					Edrag.y = CurrY - Edrag.height / 2;
+					Rdrag.x = CurrX - Rdrag.width / 2;
+					Rdrag.y = CurrY - Rdrag.height / 2;
 				}
 
 				mainFrame.updateCoordinates(CurrX, CurrY);
@@ -315,7 +334,10 @@ public class PaintingPanel extends JPanel {
 
 		if (moving || copying) {
 			g.setColor(Color.black);
-			((Graphics2D) g).draw((Shape) Edrag);
+			if (selectedShape instanceof MyEllipse)
+				((Graphics2D) g).draw((Shape) Edrag);
+			else if (selectedShape instanceof MyRectangle)
+				((Graphics2D) g).draw((Shape) Rdrag);
 
 		}
 
@@ -353,11 +375,23 @@ public class PaintingPanel extends JPanel {
 			
 			repaint();
 		}
+		else if (selectedShape instanceof MyRectangle) {
+			Rdrag = (MyRectangle) ((MyRectangle) selectedShape).clone();
+			moving = true;
+			
+			repaint();
+		}
 	}
 	
 	public void copyActionPerformed() {
 		if (selectedShape instanceof MyEllipse) {
 			Edrag = (MyEllipse) ((MyEllipse) selectedShape).clone();
+			copying = true;
+			
+			repaint();
+		}
+		else if (selectedShape instanceof MyRectangle) {
+			Rdrag = (MyRectangle) ((MyRectangle) selectedShape).clone();
 			copying = true;
 			
 			repaint();
