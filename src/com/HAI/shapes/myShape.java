@@ -14,5 +14,4 @@ public interface myShape {
 	public Graphics2D rotate (Graphics2D g  , int degree);
 	public void move (int x , int y);
 	public void copy();
-	
 }
