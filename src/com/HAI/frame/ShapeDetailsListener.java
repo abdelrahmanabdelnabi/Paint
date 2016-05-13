@@ -8,8 +8,6 @@ public interface ShapeDetailsListener {
 	// public void moveActionOccurred(), copyActionOccurred(), rotateActionOccurred(), ...
 	public void moveBtnClicked();
 	public void rotateBtnClicked();
-	
 	public void deleteBtnClicked();
-	
 	public void copyBtnClicked();
 }

@@ -239,6 +239,7 @@ public class PaintingPanel extends JPanel {
 						Rdrag.x = x - sideLength;
 					if (e.getY() < y)
 						Rdrag.y = y - sideLength;
+					
 				} else if (mainFrame.rdbtnCircle.isSelected()) {
 
 					int radius = Math.max(Math.abs(x - e.getX()), Math.abs(y - e.getY()));

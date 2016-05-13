@@ -445,6 +445,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	@Override
 	public void copyBtnClicked() {

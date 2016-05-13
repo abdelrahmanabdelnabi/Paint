@@ -109,7 +109,6 @@ public class ShapeDetails extends JPanel {
 		add(MoveBtn);
 		
 		
-		
 		RotateBtn = new JButton("Rotate");
 		RotateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
