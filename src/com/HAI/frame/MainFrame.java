@@ -411,7 +411,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		int degree = 0;
 		try{
 			degree = Integer.parseInt(input);
-		
+			
 		} catch (NumberFormatException e){
 			JOptionPane.showMessageDialog(this, "INPUT IS NOT AN INTEGER", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
 		}

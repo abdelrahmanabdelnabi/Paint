@@ -20,7 +20,8 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	public MyEllipse() {
 		super();
 	}
-
+	
+	
 	public void updateDetailsPanel(ShapeDetails panel) {
 
 		panel.setShape(this);

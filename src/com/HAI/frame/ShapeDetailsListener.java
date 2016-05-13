@@ -7,6 +7,5 @@ public interface ShapeDetailsListener {
 	// can be later changed to:
 	// public void moveActionOccurred(), copyActionOccurred(), rotateActionOccurred(), ...
 	public void moveBtnClicked();
-	
 	public void rotateBtnClicked();
 }
