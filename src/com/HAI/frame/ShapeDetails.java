@@ -3,12 +3,10 @@ package src.com.HAI.frame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Shape;
 
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
@@ -131,15 +129,6 @@ public class ShapeDetails extends JPanel {
 		OutlineBtn = new JButton("Change");
 		OutlineBtn.setBounds(112, 230, 88, 25);
 		add(OutlineBtn);
-		OutlineBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				Color newColor = null;
-				newColor = JColorChooser.showDialog(null, "Change Selected object Outline Color", newColor);
-			}
-		});
 
 	}
 	
