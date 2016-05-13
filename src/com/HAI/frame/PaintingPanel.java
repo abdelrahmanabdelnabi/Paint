@@ -333,7 +333,6 @@ public class PaintingPanel extends JPanel {
 	public void rotateActionPerformed(int degree){
 		if (selectedShape instanceof MyEllipse) {
 			
-			Shape rotated = ((MyEllipse) selectedShape).makeRotatedShape(degree);
 			
 			LinkedList<Shape> list = shapeHandlerObject.getTop();
 			LinkedList<Shape> clonedlist = (LinkedList<Shape>) list.clone();
@@ -341,7 +340,10 @@ public class PaintingPanel extends JPanel {
 			for(Shape s : clonedlist){
 				if(selectedShape == s){
 					clonedlist.remove(s);
-					clonedlist.add(rotated);
+					
+					MyEllipse newEllipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
+					newEllipse.modifyRotationAngle(degree);
+					clonedlist.add(newEllipse);
 					shapeHandlerObject.setTop(clonedlist);
 					System.out.println("found match");
 					break;

@@ -13,6 +13,12 @@ import src.com.HAI.frame.ShapeDetails;
 public class MyEllipse extends Ellipse2D.Float implements myShape {
 
 	private DrawingProperties prop = new DrawingProperties();
+	
+	int rotationAngle = 0;
+
+	public void modifyRotationAngle(int rotationAngle) {
+		this.rotationAngle += rotationAngle;
+	}
 
 	public MyEllipse(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -47,10 +53,14 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		final Graphics2D g2d = (Graphics2D) g.create();
+		Graphics2D g2d = (Graphics2D) g.create();
 
 		try {
 
+			if(rotationAngle != 0){
+				g2d = rotate(g2d, rotationAngle);
+			}
+			
 			fill(g2d);
 			outline(g2d);
 			g2d.draw(this);
@@ -61,17 +71,17 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	}
 
 	@Override
-	public void fill(Graphics2D g2d) {
+	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
-		g2d.setColor(prop.getFill());
-		g2d.fill(this);
+		g.setColor(prop.getFill());
+		((Graphics2D)g).fill(this);
 	}
 
 	@Override
-	public void outline(Graphics2D g2d) {
-		// TODO Auto-generated methdd stub
-		g2d.setStroke(prop.getStroke());
-		g2d.setColor(prop.getOutline());
+	public void outline(Graphics g) {
+		// TODO Auto-generated method stub
+		((Graphics2D)g).setStroke(prop.getStroke());
+		g.setColor(prop.getOutline());
 	}
 
 	@Override
@@ -81,14 +91,15 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	}
 
 	@Override
-	public void delete(Graphics2D g) {
+	public Graphics2D rotate(Graphics2D g, int degree) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void rotate(Graphics2D g, double degree) {
-		// TODO Auto-generated method stub
+		AffineTransform at = new AffineTransform();
+		at.rotate(Math.toRadians(degree), this.x + this.width / 2, this.y + this.height / 2);
+		
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.transform(at);
+		
+		return g2d;
 
 	}
 
@@ -105,15 +116,20 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	}
 
 	@Override
-	public void move(int x, int y, int height, int width) {
+	public void move(int x, int y) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Graphics2D copy(Graphics2D g) {
+	public void copy() {
 		// TODO Auto-generated method stub
-		return null;
+	}
+
+	@Override
+	public void delete(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -44,17 +44,17 @@ public class MyTriangle extends Polygon implements myShape {
 	}
 
 	@Override
-	public void fill(Graphics2D g2d) {
+	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
-		g2d.setColor(prop.getFill() );
-		g2d.fill(this);
+		g.setColor(prop.getFill() );
+		((Graphics2D) g).fill(this);
 	}
 
 	@Override
-	public void outline(Graphics2D g2d) {
+	public void outline(Graphics g) {
 		// TODO Auto-generated method stub
-		g2d.setStroke(prop.getStroke());
-		g2d.setColor(prop.getOutline());
+		((Graphics2D) g).setStroke(prop.getStroke());
+		g.setColor(prop.getOutline());
 	}
 
 	@Override
@@ -63,27 +63,27 @@ public class MyTriangle extends Polygon implements myShape {
 		
 	}
 
+
 	@Override
-	public void delete(Graphics2D g) {
+	public Graphics2D rotate(Graphics2D g, int degree) {
+		return g;
+		
+	}
+
+	@Override
+	public void move(int x, int y) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void rotate(Graphics2D g, double degree) {
+	public void copy() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void move(int x, int y, int height, int width) {
+	public void delete(Graphics g) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Graphics2D copy(Graphics2D g) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
