@@ -15,6 +15,7 @@ public class MyRectangle extends Rectangle implements myShape{
 
 	public void modifyRotationAngle(int angle){
 		this.rotationAngle += angle;
+		this.rotationAngle %= 360;
 	}
 	public MyRectangle() {
 		super();
@@ -26,11 +27,15 @@ public class MyRectangle extends Rectangle implements myShape{
 
 	public void draw(Graphics g) {
 
-		final Graphics2D g2d = (Graphics2D) g.create();
+		Graphics2D g2d = (Graphics2D) g.create();
 
 		try {
 			
-            fill(g2d);
+			if (rotationAngle != 0) {
+				g2d = rotate(g2d, rotationAngle);
+			}
+			
+			fill(g2d);
 			outline(g2d);
 			g2d.draw(this);
 

@@ -13,11 +13,12 @@ import src.com.HAI.frame.ShapeDetails;
 public class MyEllipse extends Ellipse2D.Float implements myShape {
 
 	private DrawingProperties prop = new DrawingProperties();
-	
+
 	int rotationAngle = 0;
 
 	public void modifyRotationAngle(int rotationAngle) {
 		this.rotationAngle += rotationAngle;
+		this.rotationAngle %= 360;
 	}
 
 	public MyEllipse(int x, int y, int width, int height) {
@@ -27,8 +28,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	public MyEllipse() {
 		super();
 	}
-	
-	
+
 	public void updateDetailsPanel(ShapeDetails panel) {
 
 		panel.setShape(this);
@@ -41,11 +41,10 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		panel.HeightField.setText(height + "");
 		panel.WidthField.setText(width + "");
 		panel.lblX.setText("X");
-        panel.lblY.setText("Y");
-        panel.lblWidth.setText("Width");
+		panel.lblY.setText("Y");
+		panel.lblWidth.setText("Width");
 		panel.lblHeight.setVisible(true);
 		panel.HeightField.setVisible(true);
-
 
 	}
 
@@ -57,7 +56,6 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		this.prop = prop;
 	}
 
-	
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
@@ -65,7 +63,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 
 		try {
 
-			if(rotationAngle != 0){
+			if (rotationAngle != 0) {
 				g2d = rotate(g2d, rotationAngle);
 			}
 			
@@ -78,18 +76,17 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		}
 	}
 
-	
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(prop.getFill());
-		((Graphics2D)g).fill(this);
+		((Graphics2D) g).fill(this);
 	}
 
 	@Override
 	public void outline(Graphics g) {
 		// TODO Auto-generated method stub
-		((Graphics2D)g).setStroke(prop.getStroke());
+		((Graphics2D) g).setStroke(prop.getStroke());
 		g.setColor(prop.getOutline());
 	}
 
@@ -104,10 +101,10 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 		// TODO Auto-generated method stub
 		AffineTransform at = new AffineTransform();
 		at.rotate(Math.toRadians(degree), this.x + this.width / 2, this.y + this.height / 2);
-		
+
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.transform(at);
-		
+
 		return g2d;
 
 	}
@@ -115,14 +112,12 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	public MyEllipse makeRotatedShape(int degree) {
 		AffineTransform at = new AffineTransform();
 		at.rotate(Math.toRadians(degree), this.x + this.width / 2, this.y + this.height / 2);
-		
-		
 
 		// create a new transformed shape from this ellipse
 		Shape rotatedShape = at.createTransformedShape(this);
-		
-		 Rectangle r =  rotatedShape.getBounds();
-		 MyEllipse rotatedEllipse = new MyEllipse(r.x, r.y, r.width, r.height);
+
+		Rectangle r = rotatedShape.getBounds();
+		MyEllipse rotatedEllipse = new MyEllipse(r.x, r.y, r.width, r.height);
 		return rotatedEllipse;
 	}
 
@@ -140,7 +135,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	@Override
 	public void delete(Graphics g) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
