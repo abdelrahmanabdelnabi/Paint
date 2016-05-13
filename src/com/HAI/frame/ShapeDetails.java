@@ -27,6 +27,12 @@ public class ShapeDetails extends JPanel {
 	private JButton FillBtn;
 	private JButton OutlineBtn;
 	private JButton DeleteBtn;
+	public JLabel lblX ;
+	public JLabel lblY ;
+	public JLabel lblWidth ;
+	public JLabel lblHeight ;
+	public JLabel lblFillColor ;
+	public JLabel lblOutlilneColor ;
 	
 	private Shape shape;
 	
@@ -47,27 +53,27 @@ public class ShapeDetails extends JPanel {
 		TypeLabel.setBounds(55, 12, 101, 15);
 		add(TypeLabel);
 		
-		JLabel lblX = new JLabel("X");
+		lblX = new JLabel("X");
 		lblX.setBounds(12, 62, 30, 15);
 		add(lblX);
 		
-		JLabel lblY = new JLabel("Y");
+		 lblY = new JLabel("Y");
 		lblY.setBounds(12, 96, 30, 15);
 		add(lblY);
 		
-		JLabel lblWidth = new JLabel("Width");
+		 lblWidth = new JLabel("Width");
 		lblWidth.setBounds(12, 128, 70, 15);
 		add(lblWidth);
 		
-		JLabel lblHeight = new JLabel("Height");
+		 lblHeight = new JLabel("Height");
 		lblHeight.setBounds(12, 155, 70, 15);
 		add(lblHeight);
 		
-		JLabel lblFillColor = new JLabel("Fill Color");
+		 lblFillColor = new JLabel("Fill Color");
 		lblFillColor.setBounds(12, 193, 70, 15);
 		add(lblFillColor);
 		
-		JLabel lblOutlilneColor = new JLabel("Outlilne Color");
+	    lblOutlilneColor = new JLabel("Outlilne Color");
 		lblOutlilneColor.setBounds(12, 235, 101, 15);
 		add(lblOutlilneColor);
 		
