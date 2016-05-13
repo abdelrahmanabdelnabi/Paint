@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Stack;
 
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -224,6 +225,8 @@ public class PaintingPanel extends JPanel {
 
 				dragging = true;
 				
+				mainFrame.updateCoordinates(e.getX(), e.getY());
+				
 				repaint();
 			}
 
@@ -254,6 +257,8 @@ public class PaintingPanel extends JPanel {
 				((MyRectangle) r).draw(g);
 			} else if (r instanceof MyEllipse) {
 				((MyEllipse) r).draw(g);
+				((MyEllipse) r).rotate(g);
+				
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
 			}

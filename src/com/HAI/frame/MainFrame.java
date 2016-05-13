@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
@@ -156,6 +157,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		bg.add(rdbtnEllipse);
 		bg.add(rdbtnRectangle);
 		bg.add(rdbtnSelect);
+		
 
 		rdbtnCircle.setSelected(true);
 
@@ -223,6 +225,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 		});
 		btnFillColor.setBounds(668, 28, 146, 25);
 		getContentPane().add(btnFillColor);
+		btnFillColor.getModel().setPressed(true);
 
 		XField = new JTextField();
 		XField.setEditable(false);
@@ -354,9 +357,27 @@ public class MainFrame extends JFrame implements ShapeDetailsListener{
 	}
 
 	@Override
-	public void PanelActionOccurred() {
+	public void moveBtnClicked() {
 		// TODO Auto-generated method stub
 		panel.moveActionPerformed();
+	}
+
+	@Override
+	public void rotateBtnClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void copyBtnClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteBtnClicked() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
