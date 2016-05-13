@@ -278,6 +278,9 @@ public class PaintingPanel extends JPanel {
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
 			}else{
+				g.setColor(Color.red);
+				((Graphics2D) g).fill(r);
+				g.setColor(Color.black);
 				((Graphics2D) g).draw(r);
 			}
 		}
