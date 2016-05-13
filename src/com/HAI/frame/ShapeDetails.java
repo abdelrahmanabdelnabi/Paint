@@ -82,7 +82,9 @@ public class ShapeDetails extends JPanel {
 		MoveBtn = new JButton("Move");
 		MoveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				notifyAllListeners();
+				for(ShapeDetailsListener listener : listeners){
+					listener.moveBtnClicked();
+				}
 			}
 		});
 		
@@ -90,6 +92,13 @@ public class ShapeDetails extends JPanel {
 		add(MoveBtn);
 		
 		RotateBtn = new JButton("Rotate");
+		RotateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(ShapeDetailsListener listener : listeners){
+					listener.rotateBtnClicked();
+				}
+			}
+		});
 		RotateBtn.setBounds(20, 318, 82, 25);
 		add(RotateBtn);
 		
@@ -147,9 +156,4 @@ public class ShapeDetails extends JPanel {
 		return new Dimension(220, 400);
 	}
 	
-	private void notifyAllListeners(){
-		for(ShapeDetailsListener l : listeners){
-			l.PanelActionOccurred();
-		}
-	}
 }

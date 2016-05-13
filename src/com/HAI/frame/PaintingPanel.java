@@ -8,7 +8,9 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.util.LinkedList;
 import java.util.Stack;
 
 import javax.swing.JButton;
@@ -68,7 +70,9 @@ public class PaintingPanel extends JPanel {
 	//Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
 	//Stack<Shape> shapes2 = new Stack<Shape>();	// a drawn
 
+
 	ShapeHandler shapeHandlerObject = ShapeHandler.getInstance() ;
+
 	public PaintingPanel() {
 		setLayout(null);
 
@@ -262,10 +266,13 @@ public class PaintingPanel extends JPanel {
 			if (r instanceof MyRectangle) {
 				((MyRectangle) r).draw(g);
 			} else if (r instanceof MyEllipse) {
-				((MyEllipse) r).draw(g);
+				//((MyEllipse) r).draw(g);
+				((Graphics2D) g).draw(( (MyEllipse) r).makeRotatedShape(90));
 				
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
+			}else{
+				((Graphics2D) g).draw(r);
 			}
 		}
 
@@ -321,6 +328,29 @@ public class PaintingPanel extends JPanel {
 		}
 	}
 	
+	public void rotateActionPerformed(int degree){
+		if (selectedShape instanceof MyEllipse) {
+			
+			Shape rotated = ((MyEllipse) selectedShape).makeRotatedShape(degree);
+			
+			LinkedList<Shape> list = shapeHandlerObject.getTop();
+			LinkedList<Shape> clonedlist = (LinkedList<Shape>) list.clone();
+			
+			for(Shape s : clonedlist){
+				if(selectedShape == s){
+					clonedlist.remove(s);
+					clonedlist.add(rotated);
+					shapeHandlerObject.setTop(clonedlist);
+					System.out.println("found match");
+					break;
+					
+				}
+			}
+			
+			repaint();
+		}
+	}
+	
 	public void thicknessChanged(int newThickness) {
 		currProp.setStroke(new BasicStroke(newThickness));
 	}
@@ -347,6 +377,7 @@ public class PaintingPanel extends JPanel {
 
 		return selected;
 	}
+	
 
 	public void setMainFrame(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
