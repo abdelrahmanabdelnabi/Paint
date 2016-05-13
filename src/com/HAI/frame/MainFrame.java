@@ -416,7 +416,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		panel.moveActionPerformed();
 
 	}
-	
+
 	@Override
 	public void rotateBtnClicked() {
 		// TODO Auto-generated method stub
@@ -444,11 +444,11 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 	public void deleteBtnClicked() {
 		panel.deleteActionPerformed();
 	}
-	
 
 	@Override
 	public void copyBtnClicked() {
-		panel.copyActionPerformed();
+		// TODO Auto-generated method stub
+		
 	}
 }
 

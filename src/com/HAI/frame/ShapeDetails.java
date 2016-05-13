@@ -79,13 +79,6 @@ public class ShapeDetails extends JPanel {
 		add(lblOutlilneColor);
 		
 		CopyBtn = new JButton("Copy");
-		CopyBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for(ShapeDetailsListener listener : listeners){
-					listener.copyBtnClicked();
-				}
-			}
-		});
 		CopyBtn.setBounds(20, 281, 80, 25);
 		add(CopyBtn);
 		CopyBtn.addActionListener(new ActionListener() {
@@ -107,6 +100,7 @@ public class ShapeDetails extends JPanel {
 		});
 		MoveBtn.setBounds(112, 281, 88, 25);
 		add(MoveBtn);
+		
 		
 		
 		RotateBtn = new JButton("Rotate");
@@ -156,10 +150,6 @@ public class ShapeDetails extends JPanel {
 		add(FillBtn);
 		
 		OutlineBtn = new JButton("Change");
-		OutlineBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		OutlineBtn.setBounds(112, 230, 88, 25);
 		add(OutlineBtn);
 
