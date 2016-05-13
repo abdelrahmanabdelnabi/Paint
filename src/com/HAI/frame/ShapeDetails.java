@@ -39,6 +39,10 @@ public class ShapeDetails extends JPanel {
 	public ShapeDetails() {
 		listeners = new ArrayList<ShapeDetailsListener>();
 		
+		
+		
+		
+	
 		setLayout(null);
 		
 		setBorder(new EtchedBorder());

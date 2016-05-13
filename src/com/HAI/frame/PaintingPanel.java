@@ -65,9 +65,10 @@ public class PaintingPanel extends JPanel {
 	private int clicks = 0; // the number of clicks clicked when drawing a
 							// triangle
 
-	Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
-	Stack<Shape> shapes2 = new Stack<Shape>();											// a drawn
+	//Stack<Shape> shapes = new Stack<Shape>(); // a stack holding the shapes that
+	//Stack<Shape> shapes2 = new Stack<Shape>();	// a drawn
 
+	ShapeHandler shapeHandlerObject = new ShapeHandler() ;
 	public PaintingPanel() {
 		setLayout(null);
 
@@ -99,27 +100,32 @@ public class PaintingPanel extends JPanel {
 							Math.abs(fy - y));
 
 					r.setProp(cloned);
-					shapes.add(r);
+					shapeHandlerObject.addShape(r);
+					
 
 				} else if (mainFrame.rdbtnEllipse.isSelected()) {
 					MyEllipse ellipse = new MyEllipse(Math.min(x, fx), Math.min(y, fy), Math.abs(fx - x),
 							Math.abs(fy - y));
 
 					ellipse.setProp(cloned);
-					shapes.add(ellipse);
+					shapeHandlerObject.addShape(ellipse);
 				} else if (mainFrame.rdbtnSquare.isSelected()) {
 					MyRectangle r = (MyRectangle) Rdrag.clone();
 
 					r.setProp(cloned);
-					shapes.add(r);
-				} else if (mainFrame.rdbtnCircle.isSelected()) {
+					shapeHandlerObject.addShape(r);
+					} else if (mainFrame.rdbtnCircle.isSelected()) {
 					MyEllipse ellipse = (MyEllipse) Edrag.clone();
 
 					ellipse.setProp(cloned);
-					shapes.add(ellipse);
+					shapeHandlerObject.addShape(ellipse);
 				}
 
 				repaint();
+				
+				
+				
+				
 			}
 
 			public void mouseClicked(MouseEvent e) {
@@ -162,7 +168,7 @@ public class PaintingPanel extends JPanel {
 							e1.printStackTrace();
 						}
 
-						shapes.add(t);
+						shapeHandlerObject.addShape(t);
 
 						// reset the number of clicks to 0
 						clicks = 0;
@@ -252,7 +258,7 @@ public class PaintingPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		for (Shape r : shapes) {
+		for (Shape r : shapeHandlerObject.getTop()) {
 			if (r instanceof MyRectangle) {
 				((MyRectangle) r).draw(g);
 			} else if (r instanceof MyEllipse) {
@@ -294,27 +300,19 @@ public class PaintingPanel extends JPanel {
 	}
 
 	public void undoActionPerformed() {
-		if (!shapes.isEmpty()) {
-			System.out.print("size before = " + shapes.size());
-			shapes2.push(shapes.pop());
-			System.out.println(" after = " + shapes.size());
-		}
+		
+		shapeHandlerObject.Undo();
 		repaint();
 	}
 	
 	public void redoActionPerformed() {
-		if (!shapes2.isEmpty()) {
-			System.out.print("size before = " + shapes2.size());
-			shapes.push(shapes2.pop());
-			System.out.println(" after = " + shapes2.size());
-		}
+	  shapeHandlerObject.Redo();
 		repaint();
 	}
 
 	public void clearActionPerformed (){
-		while(!shapes.isEmpty()){
-			shapes.pop();
-		}
+		shapeHandlerObject.clear();
+		repaint();
 	}
 	public void moveActionPerformed() {
 		if (selectedShape instanceof MyEllipse) {
@@ -340,7 +338,7 @@ public class PaintingPanel extends JPanel {
 	private Shape getSelectedShape(int x, int y) {
 		Shape selected = null;
 
-		for (Shape s : shapes) {
+		for (Shape s : shapeHandlerObject.getTop()) {
 			if (s.contains(x, y)) {
 				System.out.println("Selected " + s);
 				selected = s;

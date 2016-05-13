@@ -24,6 +24,7 @@ public class ShapeHandler {
 	}
 	
 	public void Redo() {
+	
 		if (!shapes2.isEmpty()) {
 			System.out.print("size before = " + shapes2.size());
 			shapes.push(shapes2.pop());
@@ -41,14 +42,22 @@ public class ShapeHandler {
 			addList(shapesList);
 		}
 	}
-	private void addList(LinkedList list){
+	private void addList(LinkedList<Shape> list){
 		shapes.push(list);
 	}
-	public LinkedList getTop(){
-		return shapes.peek();
+	public LinkedList<Shape> getTop(){
+		if(!shapes.isEmpty())
+			return shapes.peek();
+		else return new LinkedList<Shape>();
 	}
 	public void setTop(LinkedList list){
 		shapes.push(list);
+	}
+	public void clear(){
+		
+		while(!shapes.isEmpty()){
+			shapes.pop();
+		}
 	}
 	
 }
