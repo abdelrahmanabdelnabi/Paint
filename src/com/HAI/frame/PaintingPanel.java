@@ -141,7 +141,6 @@ public class PaintingPanel extends JPanel {
 				int yClick = e.getY();
 
 				if (moving == true) {
-					System.out.println("i am moving");
 					if (selectedShape instanceof MyEllipse) {
 						MyEllipse Ellipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
 						Ellipse.x = xClick - Ellipse.width / 2;
@@ -474,6 +473,42 @@ public class PaintingPanel extends JPanel {
 		} else if (selectedShape instanceof MyTriangle) {
 			JOptionPane.showMessageDialog(null,"Select a Place to Move Directly !");
 			moving = true;
+		} else if(selectedShape instanceof MyLine){
+			String x = JOptionPane.showInputDialog(this, "Enter the new x coordinate");
+			
+			int xpoint = 0;
+			try {
+				xpoint = Integer.parseInt(x);
+				
+			} catch (NumberFormatException e){
+				
+				JOptionPane.showMessageDialog(this, "INPUT IS NOT AN INTEGER", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			String y = JOptionPane.showInputDialog(this, "Enter the new y coordinate");
+			int ypoint = 0;
+			
+			try {
+				ypoint = Integer.parseInt(y);
+				
+			} catch (NumberFormatException e){
+				
+				JOptionPane.showMessageDialog(this, "INPUT IS NOT AN INTEGER", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			MyLine line = (MyLine) (((MyLine) selectedShape).clone());
+			
+			line.x2 += xpoint - line.x1;
+			line.y2 += ypoint - line.y1;
+			
+			line.x1 = xpoint;
+			line.y1 = ypoint;
+			
+			shapeHandlerObject.cloneShape(line, selectedShape);
+			
+			
+			
+			
 		}
 
 		repaint();
