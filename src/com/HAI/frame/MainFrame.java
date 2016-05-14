@@ -54,6 +54,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 	public JRadioButton rdbtnEllipse;
 	public JRadioButton rdbtnRectangle;
 	public JRadioButton rdbtnSelect;
+	public JRadioButton rdbtnLine;
 
 	private JTextField XField;
 	private JTextField YField;
@@ -118,12 +119,12 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		detailsPanel.WidthField.setBounds(120, 128, 80, 19);
 		detailsPanel.YField.setBounds(120, 96, 80, 19);
 		detailsPanel.XField.setBounds(120, 62, 80, 19);
-		detailsPanel.TypeLabel.setBounds(55, 12, 101, 15);
+		detailsPanel.TypeLabel.setBounds(58, 12, 117, 15);
 
 		getContentPane().add(detailsPanel);
 		detailsPanel.setVisible(false);
 
-		detailsPanel.setBounds(33, 236, detailsPanel.getPreferredSize().width, detailsPanel.getPreferredSize().height);
+		detailsPanel.setBounds(38, 275, detailsPanel.getPreferredSize().width, detailsPanel.getPreferredSize().height);
 		detailsPanel.setLayout(null);
 
 		detailsPanel.RegisterListener(this);
@@ -183,7 +184,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		getContentPane().add(rdbtnRectangle);
 
 		rdbtnSelect = new JRadioButton("Select");
-		rdbtnSelect.setBounds(158, 165, 77, 23);
+		rdbtnSelect.setBounds(158, 181, 77, 23);
 		rdbtnSelect.addItemListener(new ItemListener() {
 
 			@Override
@@ -272,22 +273,22 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 
 		XField = new JTextField();
 		XField.setEditable(false);
-		XField.setBounds(205, 84, 53, 19);
+		XField.setBounds(205, 100, 53, 19);
 		getContentPane().add(XField);
 		XField.setColumns(10);
 
 		YField = new JTextField();
 		YField.setEditable(false);
 		YField.setColumns(10);
-		YField.setBounds(205, 115, 53, 19);
+		YField.setBounds(205, 131, 53, 19);
 		getContentPane().add(YField);
 
 		JLabel lblX = new JLabel("X:");
-		lblX.setBounds(174, 84, 29, 15);
+		lblX.setBounds(174, 100, 29, 15);
 		getContentPane().add(lblX);
 
 		lblY = new JLabel("Y:");
-		lblY.setBounds(174, 115, 29, 15);
+		lblY.setBounds(174, 131, 29, 15);
 		getContentPane().add(lblY);
 
 		lblThickness = new JLabel("Thickness");
@@ -295,10 +296,11 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		getContentPane().add(lblThickness);
 
 		HLChbx = new JCheckBox("Helping Lines");
-		HLChbx.setBounds(159, 138, 129, 23);
+		HLChbx.setBounds(159, 154, 129, 23);
 		getContentPane().add(HLChbx);
+		
 		JButton btnNewButton = new JButton("Clear All");
-		btnNewButton.setBounds(158, 192, 82, 23);
+		btnNewButton.setBounds(158, 208, 115, 23);
 		getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -310,6 +312,10 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 				}
 			}
 		});
+		
+		rdbtnLine = new JRadioButton("Line");
+		rdbtnLine.setBounds(29, 219, 89, 23);
+		getContentPane().add(rdbtnLine);
 
 	}
 
