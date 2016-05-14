@@ -306,6 +306,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		
 		JButton btnNewButton = new JButton("Clear All");
 		btnNewButton.setBounds(158, 208, 115, 23);
+
 		getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -470,6 +471,23 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 	public void outlineBtnClicked(Color c) {
 		// TODO Auto-generated method stub
 		panel.shapeOutlineChanged(c);
+	}
+
+	@Override
+	public void resizeBtnClicked() {
+		String input = JOptionPane.showInputDialog("Enter Scale Factor");
+		float scale = 1;
+		try {
+			scale = Float.parseFloat(input);
+			
+		} catch (NumberFormatException e){
+			
+
+
+			JOptionPane.showMessageDialog(this, "INPUT IS NOT A Float", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		panel.resizeActionPerformed(scale);
+		
 	}
 }
 

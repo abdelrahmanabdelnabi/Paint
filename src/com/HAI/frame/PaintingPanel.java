@@ -532,6 +532,38 @@ public class PaintingPanel extends JPanel {
 		}
 	}
 
+	public void resizeActionPerformed(float scale) {
+		System.out.println("resize entered");
+		if (selectedShape instanceof MyEllipse) {
+			MyEllipse newEllipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
+			newEllipse.modifyscaleFactor(scale);
+			
+			shapeHandlerObject.cloneShape(newEllipse, selectedShape);
+			
+		} else if (selectedShape instanceof MyRectangle) {
+			MyRectangle newRect = (MyRectangle) ((MyRectangle) selectedShape).clone();
+			newRect.modifyscaleFactor(scale);
+
+			shapeHandlerObject.cloneShape(newRect, selectedShape);
+			
+		}
+//		} else if (selectedShape instanceof MyTriangle) {
+//			MyTriangle newTri = null;
+//			try {
+//				newTri = (MyTriangle) ((MyTriangle) selectedShape).clone();
+//			} catch (CloneNotSupportedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//			newTri.modifyRotationAngle(degree);
+//
+//			shapeHandlerObject.cloneShape(newTri, selectedShape);
+//		}
+		
+		repaint();
+	}
+	
 	public void rotateActionPerformed(int degree) {
 
 		if (selectedShape instanceof MyEllipse) {
