@@ -16,6 +16,7 @@ public class MyTriangle extends Polygon implements myShape {
 	DrawingProperties prop = new DrawingProperties();
 	
 	int rotationAngle = 0;
+	static float scaleFactor = 1;
 	
 	public void modifyRotationAngle(int rotationAngle) {
 		this.rotationAngle += rotationAngle;

@@ -10,12 +10,9 @@ public interface ShapeDetailsListener {
 	// public void moveActionOccurred(), copyActionOccurred(), rotateActionOccurred(), ...
 	public void moveBtnClicked();
 	public void rotateBtnClicked();
-	
 	public void deleteBtnClicked();
-	
+	public void resizeBtnClicked();
 	public void copyBtnClicked();
-	
 	public void fillBtnClicked(Color c);
-	
 	public void outlineBtnClicked(Color c);
 }

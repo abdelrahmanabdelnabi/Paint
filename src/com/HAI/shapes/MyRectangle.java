@@ -12,11 +12,19 @@ public class MyRectangle extends Rectangle implements myShape{
 	private DrawingProperties prop = new DrawingProperties();
 	
 	int rotationAngle = 0;
+	static float scaleFactor = 1;
 
 	public void modifyRotationAngle(int angle){
 		this.rotationAngle += angle;
 		this.rotationAngle %= 360;
 	}
+	
+	public void modifyscaleFactor(float scaleFactor) {
+		this.scaleFactor = scaleFactor;
+		this.width *= scaleFactor;
+		this.height *= scaleFactor;
+	}
+	
 	public MyRectangle() {
 		super();
 	}

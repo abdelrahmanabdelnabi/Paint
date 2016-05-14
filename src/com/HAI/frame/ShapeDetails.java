@@ -23,6 +23,7 @@ public class ShapeDetails extends JPanel {
 	public JTextField WidthField;
 	public JTextField HeightField;
 	public JLabel TypeLabel;
+	private JButton ResizeBtn;
 	private JButton CopyBtn;
 	private JButton MoveBtn;
 	private JButton RotateBtn;
@@ -129,6 +130,17 @@ public class ShapeDetails extends JPanel {
 		});
 		DeleteBtn.setBounds(112, 318, 88, 25);
 		add(DeleteBtn);
+		
+		ResizeBtn = new JButton("Resize");
+		ResizeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (ShapeDetailsListener listener : listeners) {
+					listener.resizeBtnClicked();
+				}
+			}
+		});
+		ResizeBtn.setBounds(112, 355, 88, 25);
+		add(ResizeBtn);
 
 		XField = new JTextField();
 		XField.setBounds(120, 62, 80, 19);
