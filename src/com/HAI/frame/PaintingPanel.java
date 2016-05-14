@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import src.com.HAI.shapes.DrawingProperties;
@@ -448,7 +449,7 @@ public class PaintingPanel extends JPanel {
 			moving = true;
 
 		} else if (selectedShape instanceof MyTriangle) {
-			System.out.println("i am called");
+			JOptionPane.showMessageDialog(null,"Select a Place to Move Directly !");
 			moving = true;
 		}
 
@@ -468,7 +469,7 @@ public class PaintingPanel extends JPanel {
 			repaint();
 		} else if (selectedShape instanceof MyTriangle) {
 			copying = true;
-
+			JOptionPane.showMessageDialog(null,"Select a Place to Copy Directly !");
 			repaint();
 		}
 	}
@@ -519,14 +520,33 @@ public class PaintingPanel extends JPanel {
 
 	public void shapeFillChanged(Color c) {
 		// TODO Auto-generated method stub
+		
+		
 		if (selectedShape instanceof MyEllipse) {
 			MyEllipse newEllipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
-			newEllipse.getProp().setFill(c);
+			DrawingProperties proper = newEllipse.getProp();
+			try {
+				DrawingProperties proper2 = (DrawingProperties) proper.clone();
+				proper2.setFill(c);
+				newEllipse.setProp(proper2);
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			shapeHandlerObject.cloneShape(newEllipse, selectedShape);
-
+		
 		} else if (selectedShape instanceof MyRectangle) {
 			MyRectangle newRect = (MyRectangle) ((MyRectangle) selectedShape).clone();
-			newRect.getProp().setFill(c);
+			DrawingProperties proper = newRect.getProp();
+			try {
+				DrawingProperties proper2 = (DrawingProperties) proper.clone();
+				proper2.setFill(c);
+				newRect.setProp(proper2);
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			shapeHandlerObject.cloneShape(newRect, selectedShape);
 		} else if (selectedShape instanceof MyTriangle) {
@@ -551,12 +571,28 @@ public class PaintingPanel extends JPanel {
 		// TODO Auto-generated method stub
 		if (selectedShape instanceof MyEllipse) {
 			MyEllipse newEllipse = (MyEllipse) ((MyEllipse) selectedShape).clone();
-			newEllipse.getProp().setOutline(c);
+			DrawingProperties proper = newEllipse.getProp();
+			try {
+				DrawingProperties proper2 = (DrawingProperties) proper.clone();
+				proper2.setOutline(c);
+				newEllipse.setProp(proper2);
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			shapeHandlerObject.cloneShape(newEllipse, selectedShape);
 
 		} else if (selectedShape instanceof MyRectangle) {
 			MyRectangle newRect = (MyRectangle) ((MyRectangle) selectedShape).clone();
-			newRect.getProp().setOutline(c);
+			DrawingProperties proper = newRect.getProp();
+			try {
+				DrawingProperties proper2 = (DrawingProperties) proper.clone();
+				proper2.setOutline(c);
+				newRect.setProp(proper2);
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			shapeHandlerObject.cloneShape(newRect, selectedShape);
 		} else if (selectedShape instanceof MyTriangle) {
