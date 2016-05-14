@@ -15,6 +15,7 @@ public class MyEllipse extends Ellipse2D.Float implements myShape {
 	private DrawingProperties prop = new DrawingProperties();
 
 	int rotationAngle = 0;
+	
 	static float scaleFactor = 1;
 
 	public void modifyRotationAngle(int rotationAngle) {

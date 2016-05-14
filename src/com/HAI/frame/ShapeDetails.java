@@ -17,7 +17,6 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class ShapeDetails extends JPanel {
-
 	public JTextField XField;
 	public JTextField YField;
 	public JTextField WidthField;

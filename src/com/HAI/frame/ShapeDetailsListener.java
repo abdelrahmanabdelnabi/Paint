@@ -3,7 +3,6 @@ package src.com.HAI.frame;
 import java.awt.Color;
 
 public interface ShapeDetailsListener {
-
 	
 	// subject to modification..
 	// can be later changed to:
