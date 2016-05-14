@@ -13,6 +13,10 @@ public class MyLine extends Line2D.Double implements myShape {
 		super(x1, y1, x2, y2);
 	}
 	
+	public MyLine(){
+		super();
+	}
+	
 	public void updateDetailsPanel(ShapeDetails panel) {
 
 		panel.setShape(this);

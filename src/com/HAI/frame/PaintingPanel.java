@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 
 import src.com.HAI.shapes.DrawingProperties;
 import src.com.HAI.shapes.MyEllipse;
+import src.com.HAI.shapes.MyLine;
 import src.com.HAI.shapes.MyRectangle;
 import src.com.HAI.shapes.MyTriangle;
 
@@ -53,6 +55,8 @@ public class PaintingPanel extends JPanel {
 												// that is drawn while draggin
 												// the ellipse
 	private MyTriangle Tdrag = new MyTriangle();
+	
+	private MyLine Ldrag = new MyLine();
 
 	// a reference to the selected shape when the user clicks on a shape to
 	// select it
@@ -121,6 +125,11 @@ public class PaintingPanel extends JPanel {
 
 					ellipse.setProp(cloned);
 					shapeHandlerObject.addShape(ellipse);
+				} else if(mainFrame.rdbtnLine.isSelected()){
+					MyLine line = (MyLine) Ldrag.clone();
+					line.setProp(cloned);
+					
+					shapeHandlerObject.addShape(line);
 				}
 
 				repaint();
@@ -261,6 +270,8 @@ public class PaintingPanel extends JPanel {
 						((MyRectangle) selectedShape).updateDetailsPanel(sd);
 					} else if (selectedShape instanceof MyTriangle) {
 						((MyTriangle) selectedShape).updateDetailsPanel(sd);
+					} else if(selectedShape instanceof MyLine){
+						((MyLine) selectedShape).updateDetailsPanel(sd);
 					}
 
 				} else if (mainFrame.rdbtnTriangle.isSelected()) {
@@ -330,6 +341,7 @@ public class PaintingPanel extends JPanel {
 					if (e.getY() < y)
 						Rdrag.y = y - sideLength;
 				} else if (mainFrame.rdbtnCircle.isSelected()) {
+					System.out.println("circle selected");
 
 					int radius = Math.max(Math.abs(x - e.getX()), Math.abs(y - e.getY()));
 
@@ -342,6 +354,11 @@ public class PaintingPanel extends JPanel {
 					else if (e.getX() < x && e.getY() < y)
 						Edrag.setFrame(x - radius, y - radius, radius, radius);
 
+				} else if(mainFrame.rdbtnLine.isSelected()){
+					Ldrag.x1 = x;
+					Ldrag.y1 = y;
+					Ldrag.x2 = e.getX();
+					Ldrag.y2 = e.getY();
 				}
 
 				dragging = true;
@@ -383,6 +400,8 @@ public class PaintingPanel extends JPanel {
 				((MyEllipse) r).draw(g);
 			} else if (r instanceof MyTriangle) {
 				((MyTriangle) r).draw(g);
+			} else if(r instanceof MyLine){
+				((MyLine) r).draw(g);
 			}
 		}
 
@@ -393,6 +412,10 @@ public class PaintingPanel extends JPanel {
 			} else if (mainFrame.rdbtnEllipse.isSelected() || mainFrame.rdbtnCircle.isSelected()) {
 				g.setColor(Color.black);
 				((Graphics2D) g).draw((Shape) Edrag);
+				System.out.println("painting circle");
+			} else if(mainFrame.rdbtnLine.isSelected()){
+				g.setColor(Color.black);
+				((Graphics2D) g).draw((Shape) Ldrag);
 			}
 
 			dragging = false;
@@ -630,7 +653,12 @@ public class PaintingPanel extends JPanel {
 		Shape selected = null;
 
 		for (Shape s : shapeHandlerObject.getTop()) {
-			if (s.contains(x, y)) {
+			if(s instanceof MyLine){
+				if(((MyLine) s).ptLineDist(x, y) < 5){
+					selected = s;
+				}
+			}
+			else if (s.contains(x, y)) {
 				System.out.println("Selected " + s);
 				selected = s;
 			}

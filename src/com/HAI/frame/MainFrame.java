@@ -196,6 +196,10 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 			}
 		});
 		getContentPane().add(rdbtnSelect);
+		
+		rdbtnLine = new JRadioButton("Line");
+		rdbtnLine.setBounds(29, 219, 89, 23);
+		getContentPane().add(rdbtnLine);
 
 		bg.add(rdbtnSquare);
 		bg.add(rdbtnCircle);
@@ -203,6 +207,7 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 		bg.add(rdbtnEllipse);
 		bg.add(rdbtnRectangle);
 		bg.add(rdbtnSelect);
+		bg.add(rdbtnLine);
 		
 		rdbtnCircle.setSelected(true);
 
@@ -313,9 +318,6 @@ public class MainFrame extends JFrame implements ShapeDetailsListener {
 			}
 		});
 		
-		rdbtnLine = new JRadioButton("Line");
-		rdbtnLine.setBounds(29, 219, 89, 23);
-		getContentPane().add(rdbtnLine);
 
 	}
 
